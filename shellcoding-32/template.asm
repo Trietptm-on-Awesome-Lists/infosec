@@ -10,4 +10,3 @@ _start:
 section .data
 
 	message: db "Hello World"
-	mlen     equ $-message

@@ -18,3 +18,5 @@ ready to use reverse shells in various languages
 shellcoding stuff, useful scripts, examples etc.
 ## utils
 other scripts, to install major tools, download configs on new boxes etc.
+## workspace
+place where I keep things related to cracking various machines, CTFs and such

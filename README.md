@@ -1,5 +1,7 @@
 # infosec - ultimate personal collection
 
+## yaes
+my personal project for most-possibly automated way for initial recon, this is work in progress
 ## buffer-overflow
 mostly exploits for different techniques when dealing with buffer overflows
 ## cracking

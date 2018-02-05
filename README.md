@@ -1,4 +1,7 @@
 # infosec - ultimate personal collection
+
+## buffer-overflow
+mostly exploits for different techniques when dealing with buffer overflows
 ## cracking
 various snippets using cracking tools
 ## dictionaries

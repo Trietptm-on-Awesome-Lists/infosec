@@ -12,13 +12,17 @@ most popular dictionaries
 dotfiles with aliases, configs, etc.
 ## exploits
 ready to use exploits, pre-compiled, checkers
-## recon
+## enumeration
 recon phase - various tools
 ## reverse-shells
 ready to use reverse shells in various languages
 ## shellcoding-32
 shellcoding stuff, useful scripts, examples etc.
+## privilege-escalation
+scripts for local exploits recognition
 ## utils
 other scripts, to install major tools, download configs on new boxes etc.
 ## workspace
 place where I keep things related to cracking various machines, CTFs and such
+## github
+interesting cloned repositories (actually I just keep script with links to repos, to not add size to my repository) with exploits, clones etc.

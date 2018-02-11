@@ -1,0 +1,503 @@
+[0;32m[17:35:43] starting yaes...[0m
+[17:35:43] checking for required tools if they are present...
+[17:35:43] loading config file from /root/.yaes.conf...
+[17:35:43] using interface tun0
+[17:35:43] running quick tcp nmap scan for open ports...
+[17:35:45] nmap quick scan results for tcp...
+[32m[17:35:45] found open port 22/tcp for service ssh[0m
+[32m[17:35:45] found open port 80/tcp for service http[0m
+[17:35:45] running quick udp nmap scan for open ports...
+[17:37:17] nmap quick scan results for udp...
+[32m[17:37:17] found open port 138/udp for service netbios-dgm[0m
+[32m[17:37:17] found open port 139/udp for service netbios-ssn[0m
+[32m[17:37:17] found open port 623/udp for service asf-rmcp[0m
+[32m[17:37:17] found open port 1645/udp for service radius[0m
+[32m[17:37:17] found open port 5632/udp for service pcanywherestat[0m
+[32m[17:37:17] found open port 10000/udp for service ndmp[0m
+[32m[17:37:17] found open port 49193/udp for service unknown[0m
+[17:37:17] starting long scans in background...
+[17:37:17] starting long deep tcp scan in background...
+[17:37:17] starting long deep udp scan in background...
+[17:37:17] running detailed nmap scan on tcp ports 22,80 in background...
+[17:37:17] checking application mapping...
+[0;32m[17:37:23] protocol on 10.10.10.6:22/tcp matches ssh[0m
+[0;32m[17:37:23] protocol on 10.10.10.6:22/tcp matches ssh-openssh[0m
+[17:37:23] port 22 seems like ssh service, starting ssh enumeration/bruteforce...
+[0;32m[17:37:23] ssh banner grabbing for 22/ssh...[0m
+|_banner: SSH-2.0-OpenSSH_5.1p1 Debian-6ubuntu2
+[0;32m[17:37:25] quick brute force on ssh using root as login...[0m
+[17:37:25] running quick hydra on popcorn/22 (ssh) in background...
+[17:37:25] checking application mapping...
+[0;32m[17:37:31] protocol on 10.10.10.6:80/tcp matches http[0m
+[0;32m[17:37:31] protocol on 10.10.10.6:80/tcp matches http-apache-2[0m
+[17:37:31] port 80 seems like web service, starting web scanners...
+[17:37:31] running nikto on popcorn/80 in background...
+[17:37:31] running gobuster on popcorn/80 in background...
+[17:37:31] checking for presence of wordpress...
+[17:37:33] running detailed nmap scan on udp ports 138,139,623,1645,5632,10000,49193 in background...
+[17:37:33] checking application mapping...
+[17:37:33] checking application mapping...
+[17:37:33] checking application mapping...
+[17:37:33] checking application mapping...
+[17:37:33] checking application mapping...
+[17:37:34] checking application mapping...
+[17:37:34] checking application mapping...
+[17:37:34] waiting for long scans to finish...
+[17:37:34] job 20168 still running... nmap
+[17:37:34] job 20351 still running... hydra
+[17:37:34] job 20610 still running... nikto
+[17:37:34] job 20612 still running... gobuster
+[17:37:34] job 20741 still running... nmap
+[17:37:44] job 20168 still running... nmap
+[17:37:44] job 20351 still running... hydra
+[17:37:44] job 20610 still running... nikto
+[17:37:44] job 20612 still running... gobuster
+[17:37:44] job 20741 still running... nmap
+[17:37:54] job 20351 still running... hydra
+[17:37:54] job 20610 still running... nikto
+[17:37:54] job 20612 still running... gobuster
+[17:38:04] job 20351 still running... hydra
+[17:38:05] job 20610 still running... nikto
+[17:38:05] job 20612 still running... gobuster
+[17:38:15] job 20351 still running... hydra
+[17:38:15] job 20610 still running... nikto
+[17:38:15] job 20612 still running... gobuster
+[17:38:25] job 20351 still running... hydra
+[17:38:25] job 20610 still running... nikto
+[17:38:25] job 20612 still running... gobuster
+[17:38:35] job 20610 still running... nikto
+[17:38:35] job 20612 still running... gobuster
+[17:38:45] job 20610 still running... nikto
+[17:38:45] job 20612 still running... gobuster
+[17:38:55] job 20610 still running... nikto
+[17:38:55] job 20612 still running... gobuster
+[17:39:05] job 20610 still running... nikto
+[17:39:05] job 20612 still running... gobuster
+[17:39:15] job 20610 still running... nikto
+[17:39:15] job 20612 still running... gobuster
+[17:39:25] job 20610 still running... nikto
+[17:39:25] job 20612 still running... gobuster
+[17:39:36] job 20610 still running... nikto
+[17:39:36] job 20612 still running... gobuster
+[17:39:46] job 20610 still running... nikto
+[17:39:46] job 20612 still running... gobuster
+[17:39:56] job 20610 still running... nikto
+[17:39:56] job 20612 still running... gobuster
+[17:40:06] job 20610 still running... nikto
+[17:40:06] job 20612 still running... gobuster
+[17:40:16] job 20610 still running... nikto
+[17:40:16] job 20612 still running... gobuster
+[17:40:26] job 20610 still running... nikto
+[17:40:26] job 20612 still running... gobuster
+[17:40:36] job 20610 still running... nikto
+[17:40:36] job 20612 still running... gobuster
+[17:40:46] job 20610 still running... nikto
+[17:40:46] job 20612 still running... gobuster
+[17:40:56] job 20610 still running... nikto
+[17:40:56] job 20612 still running... gobuster
+[17:41:06] job 20610 still running... nikto
+[17:41:06] job 20612 still running... gobuster
+[17:41:16] job 20610 still running... nikto
+[17:41:16] job 20612 still running... gobuster
+[17:41:26] job 20610 still running... nikto
+[17:41:26] job 20612 still running... gobuster
+[17:41:36] job 20610 still running... nikto
+[17:41:37] job 20612 still running... gobuster
+[17:41:47] job 20610 still running... nikto
+[17:41:47] job 20612 still running... gobuster
+[17:41:57] job 20610 still running... nikto
+[17:41:57] job 20612 still running... gobuster
+[17:42:07] job 20610 still running... nikto
+[17:42:07] job 20612 still running... gobuster
+[17:42:17] job 20610 still running... nikto
+[17:42:17] job 20612 still running... gobuster
+[17:42:27] job 20610 still running... nikto
+[17:42:27] job 20612 still running... gobuster
+[17:42:37] job 20610 still running... nikto
+[17:42:37] job 20612 still running... gobuster
+[17:42:47] job 20610 still running... nikto
+[17:42:47] job 20612 still running... gobuster
+[17:42:57] job 20610 still running... nikto
+[17:42:57] job 20612 still running... gobuster
+[17:43:07] job 20610 still running... nikto
+[17:43:07] job 20612 still running... gobuster
+[17:43:17] job 20610 still running... nikto
+[17:43:17] job 20612 still running... gobuster
+[17:43:27] job 20610 still running... nikto
+[17:43:27] job 20612 still running... gobuster
+[17:43:37] job 20610 still running... nikto
+[17:43:37] job 20612 still running... gobuster
+[17:43:48] job 20610 still running... nikto
+[17:43:48] job 20612 still running... gobuster
+[17:43:58] job 20610 still running... nikto
+[17:43:58] job 20612 still running... gobuster
+[17:44:08] job 20610 still running... nikto
+[17:44:08] job 20612 still running... gobuster
+[17:44:18] job 20610 still running... nikto
+[17:44:18] job 20612 still running... gobuster
+[17:44:28] job 20610 still running... nikto
+[17:44:28] job 20612 still running... gobuster
+[17:44:38] job 20610 still running... nikto
+[17:44:48] job 20610 still running... nikto
+[17:44:58] job 20610 still running... nikto
+[17:45:08] job 20610 still running... nikto
+[17:45:18] job 20610 still running... nikto
+[17:45:28] job 20610 still running... nikto
+[17:45:38] job 20610 still running... nikto
+[17:45:48] job 20610 still running... nikto
+[17:45:58] job 20610 still running... nikto
+[17:46:08] job 20610 still running... nikto
+[17:46:19] job 20610 still running... nikto
+[17:46:29] job 20610 still running... nikto
+[17:46:39] job 20610 still running... nikto
+[17:46:49] job 20610 still running... nikto
+[17:46:59] job 20610 still running... nikto
+[17:47:09] job 20610 still running... nikto
+[17:47:19] job 20610 still running... nikto
+[17:47:29] job 20610 still running... nikto
+[17:47:39] job 20610 still running... nikto
+[17:47:49] job 20610 still running... nikto
+[17:47:59] job 20610 still running... nikto
+[17:48:09] job 20610 still running... nikto
+[17:48:19] job 20610 still running... nikto
+[17:48:29] job 20610 still running... nikto
+[17:48:39] job 20610 still running... nikto
+[17:48:49] job 20610 still running... nikto
+[17:49:00] job 20610 still running... nikto
+[17:49:10] job 20610 still running... nikto
+[17:49:20] job 20610 still running... nikto
+[17:49:30] job 20610 still running... nikto
+[17:49:40] job 20610 still running... nikto
+[17:49:50] job 20610 still running... nikto
+[17:50:00] job 20610 still running... nikto
+[17:50:10] job 20610 still running... nikto
+[17:50:20] job 20610 still running... nikto
+[17:50:30] job 20610 still running... nikto
+[17:50:40] job 20610 still running... nikto
+[17:50:50] job 20610 still running... nikto
+[17:51:00] job 20610 still running... nikto
+[17:51:10] job 20610 still running... nikto
+[17:51:20] job 20610 still running... nikto
+[17:51:31] job 20610 still running... nikto
+[17:51:41] job 20610 still running... nikto
+[17:51:51] job 20610 still running... nikto
+[17:52:01] job 20610 still running... nikto
+[17:52:11] job 20610 still running... nikto
+[17:52:21] job 20610 still running... nikto
+[17:52:31] job 20610 still running... nikto
+[17:52:41] job 20610 still running... nikto
+[17:52:51] job 20610 still running... nikto
+[17:53:01] job 20610 still running... nikto
+[17:53:11] job 20610 still running... nikto
+[17:53:21] job 20610 still running... nikto
+[17:53:31] job 20610 still running... nikto
+[17:53:41] job 20610 still running... nikto
+[17:53:51] job 20610 still running... nikto
+[17:54:01] job 20610 still running... nikto
+[17:54:12] job 20610 still running... nikto
+[17:54:22] job 20610 still running... nikto
+[17:54:32] job 20610 still running... nikto
+[17:54:42] job 20610 still running... nikto
+[17:54:52] job 20610 still running... nikto
+[17:55:02] job 20610 still running... nikto
+[17:55:12] job 20610 still running... nikto
+[17:55:22] job 20610 still running... nikto
+[17:55:32] job 20610 still running... nikto
+[17:55:42] job 20610 still running... nikto
+[17:55:52] job 20610 still running... nikto
+[17:56:02] job 20610 still running... nikto
+[17:56:12] job 20610 still running... nikto
+[17:56:22] job 20610 still running... nikto
+[17:56:32] job 20610 still running... nikto
+[17:56:42] job 20610 still running... nikto
+[17:56:53] job 20610 still running... nikto
+[17:57:03] job 20610 still running... nikto
+[17:57:13] job 20610 still running... nikto
+[17:57:23] job 20610 still running... nikto
+[17:57:33] job 20610 still running... nikto
+[17:57:43] job 20610 still running... nikto
+[17:57:53] job 20610 still running... nikto
+[17:58:03] job 20610 still running... nikto
+[17:58:13] job 20610 still running... nikto
+[17:58:23] job 20610 still running... nikto
+[17:58:33] job 20610 still running... nikto
+[17:58:43] job 20610 still running... nikto
+[17:58:53] job 20610 still running... nikto
+[17:59:03] job 20610 still running... nikto
+[17:59:13] job 20610 still running... nikto
+[17:59:24] job 20610 still running... nikto
+[17:59:34] job 20610 still running... nikto
+[17:59:44] job 20610 still running... nikto
+[17:59:54] job 20610 still running... nikto
+[18:00:04] job 20610 still running... nikto
+[18:00:14] job 20610 still running... nikto
+[18:00:24] job 20610 still running... nikto
+[18:00:34] job 20610 still running... nikto
+[18:00:44] job 20610 still running... nikto
+[18:00:54] job 20610 still running... nikto
+[18:01:04] job 20610 still running... nikto
+[18:01:14] job 20610 still running... nikto
+[18:01:24] job 20610 still running... nikto
+[18:01:34] job 20610 still running... nikto
+[18:01:44] job 20610 still running... nikto
+[18:01:54] job 20610 still running... nikto
+[18:02:05] job 20610 still running... nikto
+[18:02:15] job 20610 still running... nikto
+[18:02:25] job 20610 still running... nikto
+[18:02:35] job 20610 still running... nikto
+[18:02:45] job 20610 still running... nikto
+[18:02:55] job 20610 still running... nikto
+[18:03:05] job 20610 still running... nikto
+[18:03:15] job 20610 still running... nikto
+[18:03:25] job 20610 still running... nikto
+[18:03:35] job 20610 still running... nikto
+[18:03:45] job 20610 still running... nikto
+[18:03:55] job 20610 still running... nikto
+[18:04:05] job 20610 still running... nikto
+[18:04:15] job 20610 still running... nikto
+[18:04:25] job 20610 still running... nikto
+[18:04:35] job 20610 still running... nikto
+[18:04:46] job 20610 still running... nikto
+[18:04:56] job 20610 still running... nikto
+[18:05:06] job 20610 still running... nikto
+[18:05:16] job 20610 still running... nikto
+[18:05:26] job 20610 still running... nikto
+[18:05:36] job 20610 still running... nikto
+[18:05:46] job 20610 still running... nikto
+[18:05:56] job 20610 still running... nikto
+[18:06:06] job 20610 still running... nikto
+[18:06:16] job 20610 still running... nikto
+[18:06:26] job 20610 still running... nikto
+[18:06:36] job 20610 still running... nikto
+[18:06:46] job 20610 still running... nikto
+[18:06:56] job 20610 still running... nikto
+[18:07:06] job 20610 still running... nikto
+[18:07:16] job 20610 still running... nikto
+[18:07:27] job 20610 still running... nikto
+[18:07:37] job 20610 still running... nikto
+[18:07:47] job 20610 still running... nikto
+[18:07:57] job 20610 still running... nikto
+[18:08:07] job 20610 still running... nikto
+[18:08:17] job 20610 still running... nikto
+[18:08:27] job 20610 still running... nikto
+[18:08:37] job 20610 still running... nikto
+[18:08:47] job 20610 still running... nikto
+[0;32m[18:09:07] report for popcorn...[0m
+[0;32m[18:09:07] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-09 17:37 CET
+Nmap scan report for popcorn (10.10.10.6)
+Host is up (0.14s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.1p1 Debian 6ubuntu2 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http    Apache httpd 2.2.12 ((Ubuntu))
+|_http-server-header: Apache/2.2.12 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|phone|WAP|printer|media device|specialized
+Running (JUST GUESSING): Linux 2.6.X|2.4.X (97%), Google Android 2.X (95%), AVM embedded (94%), Canon embedded (94%), LG embedded (93%)
+OS CPE: cpe:/o:linux:linux_kernel:2.6.26 cpe:/o:google:android:2.3.5 cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:2.4.20 cpe:/h:avm:fritz%21box_fon_wlan_7240 cpe:/h:canon:imagerunner_advance_c3320i cpe:/h:lg:ls570s cpe:/o:linux:linux_kernel:2.4
+Aggressive OS guesses: Linux 2.6.26 (97%), Android 2.3.5 (Linux 2.6) (95%), Linux 2.6.17 - 2.6.36 (95%), Linux 2.6.32 (95%), Linux 2.4.20 (Red Hat 7.2) (95%), Linux 2.6.17 (95%), Linux 2.6.30 (95%), Linux 2.6.35 (95%), AVM FRITZ!Box FON WLAN 7240 WAP (94%), Canon imageRUNNER ADVANCE C3320i copier (94%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 80/tcp)
+HOP RTT      ADDRESS
+1   76.25 ms 10.10.16.1
+2   76.36 ms popcorn (10.10.10.6)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 30.33 seconds
+[0;32m[18:09:07] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-09 17:37 CET
+Nmap scan report for popcorn (10.10.10.6)
+Host is up (0.079s latency).
+
+PORT      STATE  SERVICE        VERSION
+138/udp   closed netbios-dgm
+139/udp   closed netbios-ssn
+623/udp   closed asf-rmcp
+1645/udp  closed radius
+5632/udp  closed pcanywherestat
+10000/udp closed ndmp
+49193/udp closed unknown
+Too many fingerprints match this host to give specific OS details
+Network Distance: 2 hops
+
+TRACEROUTE (using port 139/udp)
+HOP RTT       ADDRESS
+1   106.76 ms 10.10.16.1
+2   62.21 ms  popcorn (10.10.10.6)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 21.35 seconds
+[0;32m[18:09:07] found ssh services, showing brute force attempt results...[0m
+Hydra v8.6 (c) 2017 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (http://www.thc.org/thc-hydra) starting at 2018-02-09 17:37:25
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 20 tasks per 1 server, overall 20 tasks, 1000 login tries (l:1/p:1000), ~50 tries per task
+[DATA] attacking ssh://popcorn:22/
+[ERROR] ssh target does not support password auth
+[STATUS] 1037.00 tries/min, 1037 tries in 00:01h, 4 to do in 00:01h, 7 active
+1 of 1 target completed, 0 valid passwords found
+[WARNING] Writing restore file because 2 final worker threads did not complete until end.
+[ERROR] 2 targets did not resolve or could not be connected
+[ERROR] 20 targets did not complete
+Hydra (http://www.thc.org/thc-hydra) finished at 2018-02-09 17:38:33
+[0;32m[18:09:07] found web server 10.10.10.6/80 info/issues...[0m
++ Start Time:         2018-02-09 17:37:31 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.2.12 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, inode: 43621, size: 177, mtime: Fri Mar 17 18:07:05 2017
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Apache/2.2.12 appears to be outdated (current is at least Apache/2.4.12). Apache 2.0.65 (final release) and 2.2.29 are also current.
++ Uncommon header 'tcn' found, with contents: list
++ Apache mod_negotiation is enabled with MultiViews, which allows attackers to easily brute force file names. See http://www.wisec.it/sectou.php?id=4698ebdc59d15. The following alternatives for 'index' were found: index.html
++ Retrieved x-powered-by header: PHP/5.2.10-2ubuntu6.10
++ /test: Output from the phpinfo() function was found.
++ OSVDB-112004: /test: Site appears vulnerable to the 'shellshock' vulnerability (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271).
++ OSVDB-112004: /test: Site appears vulnerable to the 'shellshock' vulnerability (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6278).
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ /test.php?%3CSCRIPT%3Ealert('Vulnerable')%3C%2FSCRIPT%3E=x: Output from the phpinfo() function was found.
++ /test/: Output from the phpinfo() function was found.
++ OSVDB-3092: /test/: This might be interesting...
++ /test/jsp/buffer1.jsp: Output from the phpinfo() function was found.
++ /test/jsp/buffer2.jsp: Output from the phpinfo() function was found.
++ /test/jsp/buffer3.jsp: Output from the phpinfo() function was found.
++ /test/jsp/buffer4.jsp: Output from the phpinfo() function was found.
++ /test/jsp/declaration/IntegerOverflow.jsp: Output from the phpinfo() function was found.
++ /test/jsp/extends1.jsp: Output from the phpinfo() function was found.
++ /test/jsp/extends2.jsp: Output from the phpinfo() function was found.
++ /test/jsp/Language.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageAutoFlush.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageDouble.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageExtends.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageImport2.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageInfo.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageInvalid.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageIsErrorPage.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageIsThreadSafe.jsp: Output from the phpinfo() function was found.
++ /test/jsp/pageSession.jsp: Output from the phpinfo() function was found.
++ /test/realPath.jsp: Output from the phpinfo() function was found.
++ /test/phpinfo.php: Output from the phpinfo() function was found.
++ OSVDB-3233: /test/phpinfo.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ /test/phpinfo.php3: Output from the phpinfo() function was found.
++ OSVDB-3233: /test/phpinfo.php3: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ /test.php: Output from the phpinfo() function was found.
++ OSVDB-3233: /test.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ /test/test.php: Output from the phpinfo() function was found.
++ OSVDB-3233: /test/test.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ /test/info.php: Output from the phpinfo() function was found.
++ OSVDB-3233: /test/info.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ /test/index.php: Output from the phpinfo() function was found.
++ OSVDB-3233: /test/index.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ /test/php_info.php: Output from the phpinfo() function was found.
++ OSVDB-3233: /test/php_info.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ OSVDB-3268: /icons/: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.
++ OSVDB-3092: /test.php: This might be interesting...
++ 8184 requests: 0 error(s) and 50 item(s) reported on remote host
++ End Time:           2018-02-09 18:08:56 (GMT1) (1885 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+[18:09:07] listing directories...
+[18:09:07] directories for ...
+/index (Status: 200)
+/rename (Status: 200)
+/test (Status: 200)
+/torrent (Status: 200)
+[18:09:07] waiting for long scans to finish...
+[0;32m[18:09:17] displaying tcp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-09 17:37 CET
+Warning: 10.10.10.6 giving up on port because retransmission cap hit (2).
+Nmap scan report for popcorn (10.10.10.6)
+Host is up (0.064s latency).
+Not shown: 62822 closed ports, 2711 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.1p1 Debian 6ubuntu2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   1024 3e:c8:1b:15:21:15:50:ec:6e:63:bc:c5:6b:80:7b:38 (DSA)
+|_  2048 aa:1f:79:21:b8:42:f4:8a:38:bd:b8:05:ef:1a:07:4d (RSA)
+80/tcp open  http    Apache httpd 2.2.12 ((Ubuntu))
+|_http-server-header: Apache/2.2.12 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 330.81 seconds
+[0;32m[18:09:17] displaying udp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-09 17:37 CET
+Warning: 10.10.10.6 giving up on port because retransmission cap hit (2).
+Nmap scan report for popcorn (10.10.10.6)
+Host is up (0.14s latency).
+
+PORT   STATE         SERVICE
+0/udp  open|filtered unknown
+1/udp  closed        tcpmux
+2/udp  closed        compressnet
+3/udp  open|filtered compressnet
+4/udp  open|filtered unknown
+5/udp  open|filtered rje
+6/udp  open|filtered unknown
+7/udp  open|filtered echo
+8/udp  open|filtered unknown
+9/udp  closed        discard
+10/udp closed        unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 3.87 seconds
+[18:09:17] matching nmap xml output with searchsploit (tcp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//popcorn/nmap/popcorn.tcp.detailed.xml'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+ Exploit Title                                                                                                                                                                                                                         |  Path
+                                                                                                                                                                                                                                       | (/usr/share/exploitdb/)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+[37;45m[KApache[m[K 1.1 / NCSA [37;45m[KHTTPd[m[K 1.5.[37;45m[K2[m[K / Netscape Server 1.[37;45m[K12[m[K/1.1/[37;45m[K2[m[K.0 - a nph-test-cgi                                                                                                                                                          | exploits/multiple/dos/19536.txt
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+Shellcodes: No Result
+
+
+[18:09:18] matching nmap udp output with searchsploit (udp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//popcorn/nmap/popcorn.udp.detailed.xml'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+ Exploit Title                                                                                                                                                                                                                         |  Path
+                                                                                                                                                                                                                                       | (/usr/share/exploitdb/)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+Dalo[37;45m[KRadius[m[K - Multiple Vulnerabilities                                                                                                                                                                                                  | exploits/php/webapps/24849.txt
+Free[37;45m[KRadius[m[K 0.x/1.1.x - Tag Field Heap Corruption                                                                                                                                                                                       | exploits/linux/dos/23391.txt
+Free[37;45m[KRadius[m[K < 1.1.8 - Zero-Length Tunnel-Password Denial of Service                                                                                                                                                                     | exploits/multiple/dos/9642.py
+Lite[37;45m[KRadius[m[K 3.2 - Multiple Blind SQL Injections                                                                                                                                                                                         | exploits/php/webapps/17528.txt
+Merit AAA [37;45m[KRADIUS[m[K Server 3.8 - rlmadmin Symbolic Link                                                                                                                                                                                   | exploits/unix/local/21101.sh
+[37;45m[KRadius[m[K Manager 3.6 - Multiple Cross-Site Scripting Vulnerabilities                                                                                                                                                                     | exploits/php/webapps/35120.txt
+[37;45m[KRadius[m[K Manager 3.8.0 - Multiple Cross-Site Scripting Vulnerabilities                                                                                                                                                                   | exploits/php/webapps/15766.txt
+TCPDump 3.6/3.7 - Malformed [37;45m[KRADIUS[m[K Packet Denial of Service                                                                                                                                                                            | exploits/linux/dos/22352.txt
+Ultimate Locator - '[37;45m[Kradius[m[K' SQL Injection                                                                                                                                                                                              | exploits/php/webapps/36623.txt
+Win[37;45m[KRadius[m[K 2.11 - Denial of Service                                                                                                                                                                                                     | exploits/windows/dos/26130.py
+Win[37;45m[KRadius[m[K Server 2009 - Denial of Service                                                                                                                                                                                              | exploits/windows/dos/18945.txt
+Yard[37;45m[KRadius[m[K - Multiple Local Format String Vulnerabilities                                                                                                                                                                              | exploits/windows/local/38672.txt
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+Shellcodes: No Result
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+ Exploit Title                                                                                                                                                                                                                         |  Path
+                                                                                                                                                                                                                                       | (/usr/share/exploitdb/)
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+Oracle Secure Backup - [37;45m[KNDMP[m[K_CONNECT_CLIENT_AUTH Buffer Overflow (Metasploit)                                                                                                                                                           | exploits/windows/remote/16343.rb
+Veritas/Symantec Backup Exec - SSL [37;45m[KNDMP[m[K Connection Use-After-Free (Metasploit)                                                                                                                                                         | exploits/windows/remote/42282.rb
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------
+Shellcodes: No Result
+
+
+[0;32m[18:09:19] yaes has finished![0m

@@ -1,0 +1,325 @@
+[0;32m[15:56:01] starting yaes...[0m
+[15:56:01] checking for required tools if they are present...
+[15:56:01] loading config file from /root/.yaes.conf...
+[15:56:01] using interface tun0
+[15:56:01] running quick tcp nmap scan for open ports...
+[15:56:04] nmap quick scan results for tcp...
+[32m[15:56:04] found open port 80/tcp for service http[0m
+[15:56:04] running quick udp nmap scan for open ports...
+[15:56:13] nmap quick scan results for udp...
+[32m[15:56:13] found open port All for service scanned[0m
+[15:56:13] starting long scans in background...
+[15:56:13] starting long deep tcp scan in background...
+[15:56:13] starting long deep udp scan in background...
+[15:56:13] running detailed nmap scan on tcp ports 80 in background...
+[15:56:13] checking application mapping...
+[0;32m[15:56:19] protocol on 10.10.10.8:80/tcp matches http[0m
+[0;32m[15:56:19] protocol on 10.10.10.8:80/tcp matches http-apache-2[0m
+[15:56:19] port 80 seems like web service, starting web scanners...
+[15:56:19] running nikto on optimum/80 in background...
+[15:56:19] running gobuster on optimum/80 in background...
+[15:56:19] checking for presence of wordpress...
+[15:56:19] running detailed nmap scan on udp ports  in background...
+[15:56:19] waiting for long scans to finish...
+[15:56:19] job 30147 still running... nmap
+[15:56:19] job 30329 still running... nikto
+[15:56:19] job 30331 still running... gobuster
+[15:56:19] job 30361 still running... nmap
+[15:56:39] job 30147 still running... nmap
+[15:56:39] job 30329 still running... nikto
+[15:56:39] job 30331 still running... gobuster
+[15:56:59] job 30329 still running... nikto
+[15:57:00] job 30331 still running... gobuster
+[15:57:20] job 30329 still running... nikto
+[15:57:20] job 30331 still running... gobuster
+[15:57:40] job 30329 still running... nikto
+[15:57:40] job 30331 still running... gobuster
+[15:58:00] job 30329 still running... nikto
+[15:58:00] job 30331 still running... gobuster
+[15:58:20] job 30329 still running... nikto
+[15:58:20] job 30331 still running... gobuster
+[15:58:40] job 30329 still running... nikto
+[15:58:40] job 30331 still running... gobuster
+[15:59:00] job 30329 still running... nikto
+[15:59:00] job 30331 still running... gobuster
+[15:59:20] job 30329 still running... nikto
+[15:59:20] job 30331 still running... gobuster
+[15:59:40] job 30329 still running... nikto
+[15:59:40] job 30331 still running... gobuster
+[16:00:00] job 30329 still running... nikto
+[16:00:00] job 30331 still running... gobuster
+[16:00:20] job 30329 still running... nikto
+[16:00:20] job 30331 still running... gobuster
+[16:00:40] job 30329 still running... nikto
+[16:00:40] job 30331 still running... gobuster
+[16:01:00] job 30329 still running... nikto
+[16:01:00] job 30331 still running... gobuster
+[16:01:20] job 30329 still running... nikto
+[16:01:20] job 30331 still running... gobuster
+[16:01:40] job 30329 still running... nikto
+[16:01:41] job 30331 still running... gobuster
+[16:02:01] job 30329 still running... nikto
+[16:02:01] job 30331 still running... gobuster
+[16:02:21] job 30331 still running... gobuster
+[16:02:41] job 30331 still running... gobuster
+[16:03:01] job 30331 still running... gobuster
+[16:03:21] job 30331 still running... gobuster
+[16:03:41] job 30331 still running... gobuster
+[16:04:01] job 30331 still running... gobuster
+[16:04:21] job 30331 still running... gobuster
+[16:04:41] job 30331 still running... gobuster
+[16:05:01] job 30331 still running... gobuster
+[16:05:21] job 30331 still running... gobuster
+[16:05:41] job 30331 still running... gobuster
+[16:06:01] job 30331 still running... gobuster
+[16:06:21] job 30331 still running... gobuster
+[16:06:41] job 30331 still running... gobuster
+[16:07:01] job 30331 still running... gobuster
+[16:07:21] job 30331 still running... gobuster
+[16:07:41] job 30331 still running... gobuster
+[16:08:02] job 30331 still running... gobuster
+[16:08:22] job 30331 still running... gobuster
+[16:08:42] job 30331 still running... gobuster
+[16:09:02] job 30331 still running... gobuster
+[16:09:22] job 30331 still running... gobuster
+[16:09:42] job 30331 still running... gobuster
+[16:10:02] job 30331 still running... gobuster
+[16:10:22] job 30331 still running... gobuster
+[16:10:42] job 30331 still running... gobuster
+[16:11:02] job 30331 still running... gobuster
+[16:11:22] job 30331 still running... gobuster
+[16:11:42] job 30331 still running... gobuster
+[16:12:02] job 30331 still running... gobuster
+[16:12:22] job 30331 still running... gobuster
+[16:12:42] job 30331 still running... gobuster
+[16:13:02] job 30331 still running... gobuster
+[16:13:22] job 30331 still running... gobuster
+[16:13:43] job 30331 still running... gobuster
+[16:14:03] job 30331 still running... gobuster
+[16:14:23] job 30331 still running... gobuster
+[16:14:43] job 30331 still running... gobuster
+[16:15:03] job 30331 still running... gobuster
+[16:15:23] job 30331 still running... gobuster
+[16:15:43] job 30331 still running... gobuster
+[16:16:03] job 30331 still running... gobuster
+[16:16:23] job 30331 still running... gobuster
+[16:16:43] job 30331 still running... gobuster
+[16:17:03] job 30331 still running... gobuster
+[16:17:23] job 30331 still running... gobuster
+[16:17:43] job 30331 still running... gobuster
+[16:18:03] job 30331 still running... gobuster
+[16:18:43] running quick tcp nmap scan for open ports...
+[16:18:51] nmap quick scan results for tcp...
+[32m[16:18:51] found open port 80/tcp for service http[0m
+[16:18:51] running quick udp nmap scan for open ports...
+[16:18:59] nmap quick scan results for udp...
+[32m[16:18:59] found open port All for service scanned[0m
+[16:18:59] starting long scans in background...
+[16:18:59] starting long deep tcp scan in background...
+[16:18:59] starting long deep udp scan in background...
+[16:18:59] running detailed nmap scan on tcp ports 80 in background...
+[16:18:59] checking application mapping...
+[0;32m[16:19:05] protocol on 10.10.10.8:80/tcp matches http[0m
+[0;32m[16:19:05] protocol on 10.10.10.8:80/tcp matches http-apache-2[0m
+[16:19:05] port 80 seems like web service, starting web scanners...
+[16:19:05] running nikto on optimum/80 in background...
+[16:19:05] running gobuster on optimum/80 in background...
+[16:19:05] checking for presence of wordpress...
+[0;32m[16:19:05] found possible wordpress instance, enumerating...[0m
+[16:19:05] running wpscan on optimum/80 in background...
+[16:19:05] running detailed nmap scan on udp ports  in background...
+[16:19:05] waiting for long scans to finish...
+[16:19:05] job 31608 still running... nmap
+[16:19:05] job 31705 still running... nikto
+[16:19:05] job 31707 still running... gobuster
+[16:19:05] job 31774 still running... wpscan
+[16:19:06] job 31785 still running... nmap
+[0;31m[16:19:06] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[16:19:06] found web server / info/issues...[0m
+[16:19:06] listing directories...
+[16:19:06] directories for ...
+[0;32m[16:19:06] wordpress instance enumeration...[0m
+[16:19:26] job 31608 still running... nmap
+[16:19:26] job 31705 still running... nikto
+[16:19:26] job 31707 still running... gobuster
+[16:19:46] job 31705 still running... nikto
+[16:19:46] job 31707 still running... gobuster
+[0;31m[16:19:46] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[16:19:46] found web server 10.10.10.8/80 info/issues...[0m
++ Start Time:         2018-02-11 16:19:05 (GMT1)
+---------------------------------------------------------------------------
++ Server: HFS 2.3
++ Cookie HFS_SID created without the httponly flag
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
+[16:19:46] listing directories...
+[16:19:46] directories for ...
+[0;32m[16:19:46] wordpress instance enumeration...[0m
+
+[31m[!][0m The remote website is up, but does not seem to be running WordPress.
+[16:20:06] job 31705 still running... nikto
+[16:20:06] job 31707 still running... gobuster
+[16:20:26] job 31705 still running... nikto
+[16:20:26] job 31707 still running... gobuster
+[16:20:46] job 31705 still running... nikto
+[16:20:46] job 31707 still running... gobuster
+[16:21:06] job 31705 still running... nikto
+[16:21:06] job 31707 still running... gobuster
+[16:21:27] job 31705 still running... nikto
+[16:21:27] job 31707 still running... gobuster
+[16:21:47] job 31705 still running... nikto
+[16:21:47] job 31707 still running... gobuster
+[16:22:07] job 31705 still running... nikto
+[16:22:07] job 31707 still running... gobuster
+[16:22:27] job 31705 still running... nikto
+[16:22:27] job 31707 still running... gobuster
+[16:22:47] job 31705 still running... nikto
+[16:22:47] job 31707 still running... gobuster
+[16:23:07] job 31705 still running... nikto
+[16:23:07] job 31707 still running... gobuster
+[16:23:27] job 31705 still running... nikto
+[16:23:27] job 31707 still running... gobuster
+[16:23:48] job 31705 still running... nikto
+[16:23:48] job 31707 still running... gobuster
+[16:24:08] job 31705 still running... nikto
+[16:24:08] job 31707 still running... gobuster
+[16:24:28] job 31705 still running... nikto
+[16:24:28] job 31707 still running... gobuster
+[16:24:48] job 31705 still running... nikto
+[16:24:48] job 31707 still running... gobuster
+[16:25:08] job 31705 still running... nikto
+[16:25:08] job 31707 still running... gobuster
+[16:25:28] job 31705 still running... nikto
+[16:25:28] job 31707 still running... gobuster
+[16:25:48] job 31707 still running... gobuster
+[16:26:08] job 31707 still running... gobuster
+[16:26:29] job 31707 still running... gobuster
+[16:26:49] job 31707 still running... gobuster
+[16:27:09] job 31707 still running... gobuster
+[16:27:29] job 31707 still running... gobuster
+[16:27:49] job 31707 still running... gobuster
+[16:28:09] job 31707 still running... gobuster
+[16:28:29] job 31707 still running... gobuster
+[16:28:49] job 31707 still running... gobuster
+[16:29:09] job 31707 still running... gobuster
+[16:29:29] job 31707 still running... gobuster
+[16:29:50] job 31707 still running... gobuster
+[16:30:10] job 31707 still running... gobuster
+[16:30:30] job 31707 still running... gobuster
+[16:30:50] job 31707 still running... gobuster
+[16:31:10] job 31707 still running... gobuster
+[16:31:30] job 31707 still running... gobuster
+[16:31:50] job 31707 still running... gobuster
+[16:32:10] job 31707 still running... gobuster
+[16:32:30] job 31707 still running... gobuster
+[16:32:51] job 31707 still running... gobuster
+[16:33:11] job 31707 still running... gobuster
+[16:33:31] job 31707 still running... gobuster
+[16:33:51] job 31707 still running... gobuster
+[16:34:11] job 31707 still running... gobuster
+[16:34:31] job 31707 still running... gobuster
+[16:34:51] job 31707 still running... gobuster
+[16:35:11] job 31707 still running... gobuster
+[16:35:31] job 31707 still running... gobuster
+[16:35:52] job 31707 still running... gobuster
+[16:36:12] job 31707 still running... gobuster
+[16:36:32] job 31707 still running... gobuster
+[16:36:52] job 31707 still running... gobuster
+[16:37:12] job 31707 still running... gobuster
+[16:37:32] job 31707 still running... gobuster
+[16:37:52] job 31707 still running... gobuster
+[16:38:12] job 31707 still running... gobuster
+[16:38:32] job 31707 still running... gobuster
+[16:38:52] job 31707 still running... gobuster
+[16:39:13] job 31707 still running... gobuster
+[16:39:33] job 31707 still running... gobuster
+[16:39:53] job 31707 still running... gobuster
+[16:40:13] job 31707 still running... gobuster
+[16:40:33] job 31707 still running... gobuster
+[16:40:53] job 31707 still running... gobuster
+[0;32m[16:41:33] report for optimum...[0m
+[0;32m[16:41:33] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-11 16:18 CET
+Nmap scan report for optimum (10.10.10.8)
+Host is up (0.091s latency).
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    HttpFileServer httpd 2.3
+|_http-title: HFS /
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Microsoft Windows Server 2012 (98%), Microsoft Windows Server 2012 or Windows Server 2012 R2 (98%), Microsoft Windows Server 2012 R2 (98%), Microsoft Windows 7 Professional (91%), Microsoft Windows 8.1 Update 1 (90%), Microsoft Windows Phone 7.5 or 8.0 (90%), Microsoft Windows Server 2008 R2 (89%), Microsoft Windows Server 2008 R2 or Windows 8.1 (89%), Microsoft Windows Server 2008 R2 SP1 (89%), Microsoft Windows Server 2008 R2 SP1 or Windows 8 (89%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+TRACEROUTE (using port 80/tcp)
+HOP RTT      ADDRESS
+1   89.01 ms 10.10.16.1
+2   71.01 ms optimum (10.10.10.8)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 49.80 seconds
+[0;32m[16:41:33] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-11 16:19 CET
+Found no matches for the service mask 'optimum' and your specified protocols
+QUITTING!
+[0;32m[16:41:33] found web server 10.10.10.8/80 info/issues...[0m
++ Start Time:         2018-02-11 16:19:05 (GMT1)
+---------------------------------------------------------------------------
++ Server: HFS 2.3
++ Cookie HFS_SID created without the httponly flag
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ ERROR: Error limit (20) reached for host, giving up. Last error: error reading HTTP response
++ Scan terminated:  3 error(s) and 4 item(s) reported on remote host
++ End Time:           2018-02-11 16:25:45 (GMT1) (400 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+[16:41:33] listing directories...
+[16:41:33] directories for ...
+[0;32m[16:41:33] wordpress instance enumeration...[0m
+
+[31m[!][0m The remote website is up, but does not seem to be running WordPress.
+[16:41:33] waiting for long scans to finish...
+[0;32m[16:41:43] displaying tcp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-11 16:18 CET
+Nmap scan report for optimum (10.10.10.8)
+Host is up (0.11s latency).
+Skipping host optimum (10.10.10.8) due to host timeout
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 901.06 seconds
+[0;32m[16:41:43] displaying udp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-11 16:18 CET
+Nmap scan report for optimum (10.10.10.8)
+Host is up (0.078s latency).
+
+PORT   STATE         SERVICE
+0/udp  open|filtered unknown
+1/udp  open|filtered tcpmux
+2/udp  open|filtered compressnet
+3/udp  open|filtered compressnet
+4/udp  open|filtered unknown
+5/udp  open|filtered rje
+6/udp  open|filtered unknown
+7/udp  open|filtered echo
+8/udp  open|filtered unknown
+9/udp  open|filtered discard
+10/udp open|filtered unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 2.87 seconds
+[16:41:43] matching nmap xml output with searchsploit (tcp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//optimum/nmap/optimum.tcp.detailed.xml'
+
+[16:41:43] matching nmap udp output with searchsploit (udp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//optimum/nmap/optimum.udp.detailed.xml'
+
+[0;32m[16:41:44] yaes has finished![0m

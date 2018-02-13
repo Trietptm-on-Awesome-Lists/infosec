@@ -1,0 +1,228 @@
+[0;32m[08:18:42] starting yaes...[0m
+[08:18:42] checking for required tools if they are present...
+[08:18:42] loading config file from /root/.yaes.conf...
+[08:18:42] using interface tun0
+[08:18:42] running quick tcp nmap scan for open ports...
+[08:18:46] nmap quick scan results for tcp...
+[32m[08:18:46] found open port 21/tcp for service ftp[0m
+[32m[08:18:46] found open port 80/tcp for service http[0m
+[08:18:46] running quick udp nmap scan for open ports...
+[08:18:56] nmap quick scan results for udp...
+[08:18:56] starting long scans in background...
+[08:18:56] starting long deep tcp scan in background...
+[08:18:56] starting long deep udp scan in background...
+[08:18:56] running detailed nmap scan on tcp ports 21,80 in background...
+[08:18:56] checking application mapping...
+[0;32m[08:18:56] protocol on 10.10.10.5:21/tcp matches ftp[0m
+[0;32m[08:18:56] protocol on 10.10.10.5:21/tcp matches smtp[0m
+[08:18:56] port 21 seems like ftp service, starting ftp enumeration/bruteforce...
+[0;32m[08:18:56] trying to download files as anonymous user from ftp server...[0m
+[0;32m[08:18:57] ftp banner grabbing for 21/ftp...[0m
+|_banner: 220 Microsoft FTP Service
+[0;32m[08:18:59] trying to list ftp directories as anonymous user...[0m
+03-18-17  01:06AM       <DIR>          aspnet_client
+03-17-17  04:37PM                  689 iisstart.htm
+03-17-17  04:37PM               184946 welcome.png
+[08:19:01] found popular ftp server, looking for potential exploits...
+[0;32m[08:19:02] quick brute force on ftp using root as login...[0m
+[08:19:02] running quick hydra on devel/21 (ftp) in background...
+[08:19:02] checking application mapping...
+[0;32m[08:19:02] protocol on 10.10.10.5:80/tcp matches http[0m
+[0;32m[08:19:02] protocol on 10.10.10.5:80/tcp matches http-apache-2[0m
+[0;32m[08:19:02] protocol on 10.10.10.5:80/tcp matches http-iis[0m
+[08:19:02] port 80 seems like web service, starting web scanners...
+[08:19:02] running nikto on devel/80 in background...
+[08:19:02] running gobuster on devel/80 in background...
+[08:19:02] checking for presence of wordpress...
+[08:19:03] running detailed nmap scan on udp ports  in background...
+[08:19:03] waiting for long scans to finish...
+[08:19:03] job 13956 still running... nmap
+[08:19:03] job 14159 still running... hydra
+[08:19:03] job 14227 still running... nikto
+[08:19:03] job 14229 still running... gobuster
+[08:19:03] job 14259 still running... nmap
+[0;31m[08:19:03] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[08:19:04] found web server 10.10.10.5/80 info/issues...[0m
++ Start Time:         2018-02-12 08:19:03 (GMT1)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/7.5
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
+[08:19:04] listing directories...
+[08:19:04] directories for ...
+[08:19:24] job 13956 still running... nmap
+[08:19:24] job 14227 still running... nikto
+[08:19:24] job 14229 still running... gobuster
+[08:19:44] job 14227 still running... nikto
+[08:19:44] job 14229 still running... gobuster
+[0;31m[08:19:44] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[08:19:44] found web server 10.10.10.5/80 info/issues...[0m
++ Start Time:         2018-02-12 08:19:03 (GMT1)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/7.5
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Retrieved x-aspnet-version header: 2.0.50727
++ No CGI Directories found (use '-C all' to force check all possible dirs)
+[08:19:44] listing directories...
+[08:19:44] directories for ...
+[08:20:04] job 14227 still running... nikto
+[08:20:04] job 14229 still running... gobuster
+[08:20:24] job 14227 still running... nikto
+[08:20:24] job 14229 still running... gobuster
+[08:20:44] job 14227 still running... nikto
+[08:20:44] job 14229 still running... gobuster
+[08:21:05] job 14227 still running... nikto
+[08:21:05] job 14229 still running... gobuster
+[08:21:25] job 14227 still running... nikto
+[08:21:25] job 14229 still running... gobuster
+[08:21:45] job 14227 still running... nikto
+[08:22:05] job 14227 still running... nikto
+[08:22:25] job 14227 still running... nikto
+[08:22:45] job 14227 still running... nikto
+[08:23:05] job 14227 still running... nikto
+[08:23:25] job 14227 still running... nikto
+[08:23:45] job 14227 still running... nikto
+[08:24:05] job 14227 still running... nikto
+[08:24:25] job 14227 still running... nikto
+[08:24:45] job 14227 still running... nikto
+[08:25:05] job 14227 still running... nikto
+[08:25:25] job 14227 still running... nikto
+[08:25:45] job 14227 still running... nikto
+[08:26:06] job 14227 still running... nikto
+[08:26:26] job 14227 still running... nikto
+[08:26:46] job 14227 still running... nikto
+[08:27:06] job 14227 still running... nikto
+[08:27:26] job 14227 still running... nikto
+[08:27:46] job 14227 still running... nikto
+[08:28:06] job 14227 still running... nikto
+[08:28:26] job 14227 still running... nikto
+[08:28:46] job 14227 still running... nikto
+[08:29:06] job 14227 still running... nikto
+[08:29:26] job 14227 still running... nikto
+[08:29:46] job 14227 still running... nikto
+[08:30:06] job 14227 still running... nikto
+[08:30:26] job 14227 still running... nikto
+[08:30:46] job 14227 still running... nikto
+[08:31:06] job 14227 still running... nikto
+[0;32m[08:31:46] report for devel...[0m
+[0;32m[08:31:46] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-12 08:18 CET
+Nmap scan report for devel (10.10.10.5)
+Host is up (0.17s latency).
+
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     Microsoft ftpd
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 03-18-17  01:06AM       <DIR>          aspnet_client
+| 03-17-17  04:37PM                  689 iisstart.htm
+|_03-17-17  04:37PM               184946 welcome.png
+| ftp-syst: 
+|_  SYST: Windows_NT
+80/tcp open  http    Microsoft IIS httpd 7.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: IIS7
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running: Microsoft Windows Vista
+OS CPE: cpe:/o:microsoft:windows_vista::sp1:home_premium
+OS details: Microsoft Windows Vista Home Premium SP1
+Network Distance: 2 hops
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+TRACEROUTE (using port 21/tcp)
+HOP RTT       ADDRESS
+1   144.03 ms 10.10.16.1
+2   144.07 ms devel (10.10.10.5)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 29.27 seconds
+[0;32m[08:31:46] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-12 08:19 CET
+Found no matches for the service mask 'devel' and your specified protocols
+QUITTING!
+[0;32m[08:31:46] found ftp services, showing brute force attempt results...[0m
+Hydra v8.6 (c) 2017 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (http://www.thc.org/thc-hydra) starting at 2018-02-12 08:19:02
+[DATA] max 50 tasks per 1 server, overall 50 tasks, 1000 login tries (l:1/p:1000), ~20 tries per task
+[DATA] attacking ftp://devel:21/
+[VERBOSE] Resolving addresses ... [VERBOSE] resolving done
+[STATUS] attack finished for devel (waiting for children to complete tests)
+1 of 1 target completed, 0 valid passwords found
+Hydra (http://www.thc.org/thc-hydra) finished at 2018-02-12 08:19:14
+[0;32m[08:31:46] found web server 10.10.10.5/80 info/issues...[0m
++ Start Time:         2018-02-12 08:19:03 (GMT1)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/7.5
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Retrieved x-aspnet-version header: 2.0.50727
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: OPTIONS, TRACE, GET, HEAD, POST 
++ Public HTTP Methods: OPTIONS, TRACE, GET, HEAD, POST 
+[08:31:47] listing directories...
+[08:31:47] directories for ...
+[08:31:47] waiting for long scans to finish...
+[0;32m[08:31:57] displaying tcp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-12 08:18 CET
+Nmap scan report for devel (10.10.10.5)
+Host is up (0.13s latency).
+Not shown: 65533 filtered ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     Microsoft ftpd
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| 03-18-17  01:06AM       <DIR>          aspnet_client
+| 03-17-17  04:37PM                  689 iisstart.htm
+|_03-17-17  04:37PM               184946 welcome.png
+| ftp-syst: 
+|_  SYST: Windows_NT
+80/tcp open  http    Microsoft IIS httpd 7.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/7.5
+|_http-title: IIS7
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 233.29 seconds
+[0;32m[08:31:57] displaying udp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-12 08:18 CET
+Nmap scan report for devel (10.10.10.5)
+Host is up (0.18s latency).
+
+PORT   STATE         SERVICE
+0/udp  open|filtered unknown
+1/udp  open|filtered tcpmux
+2/udp  open|filtered compressnet
+3/udp  open|filtered compressnet
+4/udp  open|filtered unknown
+5/udp  open|filtered rje
+6/udp  open|filtered unknown
+7/udp  open|filtered echo
+8/udp  open|filtered unknown
+9/udp  open|filtered discard
+10/udp open|filtered unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 3.04 seconds
+[08:31:57] matching nmap xml output with searchsploit (tcp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//devel/nmap/devel.tcp.detailed.xml'
+
+[08:31:57] matching nmap udp output with searchsploit (udp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//devel/nmap/devel.udp.detailed.xml'
+
+[0;32m[08:31:57] yaes has finished![0m

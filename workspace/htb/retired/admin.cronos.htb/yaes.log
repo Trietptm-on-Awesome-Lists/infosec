@@ -1,0 +1,156 @@
+[0;32m[11:12:35] starting yaes...[0m
+[11:12:35] checking for required tools if they are present...
+[11:12:35] loading config file from /root/.yaes.conf...
+[11:12:35] using interface tun0
+[11:12:35] running quick tcp nmap scan for open ports...
+[11:12:37] nmap quick scan results for tcp...
+[32m[11:12:37] found open port 22/tcp for service ssh[0m
+[32m[11:12:37] found open port 53/tcp for service domain[0m
+[32m[11:12:37] found open port 80/tcp for service http[0m
+[11:12:37] running quick udp nmap scan for open ports...
+[11:12:40] nmap quick scan results for udp...
+[11:12:40] starting long scans in background...
+[11:12:40] starting long deep tcp scan in background...
+[11:12:40] starting long deep udp scan in background...
+[11:12:40] running detailed nmap scan on tcp ports 22,53,80 in background...
+[11:12:40] checking application mapping...
+[0;32m[11:12:46] protocol on 10.10.10.13:22/tcp matches ssh[0m
+[0;32m[11:12:46] protocol on 10.10.10.13:22/tcp matches ssh-openssh[0m
+[11:12:46] port 22 seems like ssh service, starting ssh enumeration/bruteforce...
+[0;32m[11:12:46] ssh banner grabbing for 22/ssh...[0m
+|_banner: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.1
+[0;32m[11:12:46] quick brute force on ssh using root as login...[0m
+[11:12:46] running quick hydra on admin.cronos.htb/22 (ssh) in background...
+[11:12:46] checking application mapping...
+[0;32m[11:12:56] protocol on 10.10.10.13:53/tcp matches dns[0m
+[11:12:56] port 53 seems like dns, starting dns enumeration...
+
+; <<>> DiG 9.11.2-P1-1-Debian <<>> @admin.cronos.htb admin.cronos.htb any
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 42688
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 2
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;admin.cronos.htb.		IN	ANY
+
+;; ANSWER SECTION:
+admin.cronos.htb.	604800	IN	A	10.10.10.13
+
+;; AUTHORITY SECTION:
+cronos.htb.		604800	IN	NS	ns1.cronos.htb.
+
+;; ADDITIONAL SECTION:
+ns1.cronos.htb.		604800	IN	A	10.10.10.13
+
+;; Query time: 84 msec
+;; SERVER: 10.10.10.13#53(10.10.10.13)
+;; WHEN: Sat Feb 24 11:12:56 CET 2018
+;; MSG SIZE  rcvd: 95
+
+[11:12:56] checking application mapping...
+[0;32m[11:13:02] protocol on 10.10.10.13:80/tcp matches http[0m
+[0;32m[11:13:02] protocol on 10.10.10.13:80/tcp matches http-apache-2[0m
+[11:13:02] port 80 seems like web service, starting web scanners...
+[11:13:02] checking available methods on admin.cronos.htb/80...
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-24 11:13 CET
+Nmap scan report for admin.cronos.htb (10.10.10.13)
+Host is up (0.043s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+
+Nmap done: 1 IP address (1 host up) scanned in 1.45 seconds
+[11:13:03] running whatweb on admin.cronos.htb/80...
+[1m[34mhttp://admin.cronos.htb:80/[0m [200 OK] [1m[37mApache[0m[[1m[32m2.4.18[0m], [1m[37mCookies[0m[[37mPHPSESSID[0m], [1m[37mCountry[0m[[37mRESERVED[0m][[1m[31mZZ[0m], [1m[37mHTTPServer[0m[[1m[31mUbuntu Linux[0m][[1m[36mApache/2.4.18 (Ubuntu)[0m], [1m[37mIP[0m[[37m10.10.10.13[0m], [1m[37mPoweredBy[0m[[37m{[0m], [1m[37mScript[0m[[37mtext/javascript[0m], [1m[37mTitle[0m[[1m[33mLogin Page[0m]
+[11:13:04] running fimap on admin.cronos.htb/80...
+fimap v.1.00_svn (My life for Aiur)
+:: Automatic LFI/RFI scanner and exploiter
+:: by Iman Karim (fimap.dev@gmail.com)
+
+AutoAwesome mode engaging URL 'http://admin.cronos.htb:80/'...
+Requesting 'http://admin.cronos.htb:80/'...
+Cookies retrieved. Using them for further requests.
+Testing file inclusion against given cookies...
+[10:13:04] [OUT] Inspecting URL 'http://admin.cronos.htb:80/'...
+[10:13:04] [INFO] Fiddling around with URL...
+An input field doesn't have an 'name' attribute! Skipping it.
+Analyzing form 'Unnamed Form #1' for file inclusion bugs.
+[10:13:05] [OUT] Inspecting URL 'http://admin.cronos.htb:80/'...
+[10:13:05] [INFO] Fiddling around with URL...
+Starting harvester engine to get links (Depth: 0)...
+No links found.
+AutoAwesome is done.
+[11:13:05] testing webdav...
+********************************************************
+ Testing DAV connection
+[11:13:06] running nikto on admin.cronos.htb/80 in background...
+[11:13:06] running gobuster on admin.cronos.htb/80 in background...
+[11:13:06] checking for presence of wordpress...
+[11:13:06] running detailed nmap scan on udp ports 53 in background...
+[11:13:06] checking application mapping...
+[0;32m[11:13:15] Protocol on 10.10.10.13:53/tcp matches dns[0m
+[11:13:15] waiting for long scans to finish...
+[0;31m[11:14:56] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:14:56] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-24 11:13:06 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Cookie PHPSESSID created without the httponly flag
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
+[11:14:56] directories for http://admin.cronos.htb:80/...
+[0;31m[11:16:57] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:16:57] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-24 11:13:06 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Cookie PHPSESSID created without the httponly flag
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ /config.php: PHP Config file may contain database IDs and passwords.
+[11:16:57] directories for http://admin.cronos.htb:80/...
+[0;31m[11:18:57] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:18:57] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-24 11:13:06 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Cookie PHPSESSID created without the httponly flag
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ /config.php: PHP Config file may contain database IDs and passwords.
++ OSVDB-3233: /icons/README: Apache default file found.
+[11:18:57] directories for http://admin.cronos.htb:80/...
+[0;31m[11:20:57] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:20:57] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-24 11:13:06 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Cookie PHPSESSID created without the httponly flag
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ /config.php: PHP Config file may contain database IDs and passwords.
++ OSVDB-3233: /icons/README: Apache default file found.
+[11:20:57] directories for http://admin.cronos.htb:80/...

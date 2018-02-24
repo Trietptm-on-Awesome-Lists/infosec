@@ -1,0 +1,210 @@
+[0;32m[17:58:28] starting yaes...[0m
+[17:58:28] checking for required tools if they are present...
+[17:58:28] loading config file from /root/.yaes.conf...
+[17:58:28] using interface tun0
+[17:58:28] running quick tcp nmap scan for open ports...
+[17:58:29] nmap quick scan results for tcp...
+[32m[17:58:29] found open port 22/tcp for service ssh[0m
+[32m[17:58:29] found open port 80/tcp for service http[0m
+[17:58:29] running quick udp nmap scan for open ports...
+[17:59:27] nmap quick scan results for udp...
+[17:59:27] starting long scans in background...
+[17:59:27] starting long deep tcp scan in background...
+[17:59:27] starting long deep udp scan in background...
+[17:59:27] running detailed nmap scan on tcp ports 22,80 in background...
+[17:59:27] checking application mapping...
+[0;32m[17:59:33] protocol on 10.10.10.18:22/tcp matches ssh[0m
+[0;32m[17:59:33] protocol on 10.10.10.18:22/tcp matches ssh-openssh[0m
+[17:59:33] port 22 seems like ssh service, starting ssh enumeration/bruteforce...
+[0;32m[17:59:33] ssh banner grabbing for 22/ssh...[0m
+|_banner: SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8
+[0;32m[17:59:33] quick brute force on ssh using root as login...[0m
+[17:59:33] running quick hydra on lazy/22 (ssh) in background...
+[17:59:33] checking application mapping...
+[0;32m[17:59:40] protocol on 10.10.10.18:80/tcp matches http[0m
+[0;32m[17:59:40] protocol on 10.10.10.18:80/tcp matches http-apache-2[0m
+[17:59:40] port 80 seems like web service, starting web scanners...
+[17:59:40] checking available methods on lazy/80...
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-24 17:59 CET
+Nmap scan report for lazy (10.10.10.18)
+Host is up (0.073s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+
+Nmap done: 1 IP address (1 host up) scanned in 1.38 seconds
+[17:59:41] running whatweb on lazy/80...
+[1m[34mhttp://lazy:80/[0m [200 OK] [1m[37mApache[0m[[1m[32m2.4.7[0m], [1m[37mCountry[0m[[37mRESERVED[0m][[1m[31mZZ[0m], [1m[37mHTTPServer[0m[[1m[31mUbuntu Linux[0m][[1m[36mApache/2.4.7 (Ubuntu)[0m], [1m[37mIP[0m[[37m10.10.10.18[0m], [1m[37mPHP[0m[[1m[32m5.5.9-1ubuntu4.21[0m], [1m[37mTitle[0m[[1m[33mCompanyDev[0m], [1m[37mX-Powered-By[0m[[37mPHP/5.5.9-1ubuntu4.21[0m]
+[17:59:42] running fimap on lazy/80...
+fimap v.1.00_svn (My life for Aiur)
+:: Automatic LFI/RFI scanner and exploiter
+:: by Iman Karim (fimap.dev@gmail.com)
+
+AutoAwesome mode engaging URL 'http://lazy:80/'...
+Requesting 'http://lazy:80/'...
+Starting harvester engine to get links (Depth: 0)...
+Harvesting done. 2 links found. Analyzing links now...
+[16:59:42] [OUT] Inspecting URL 'http://lazy/login.php'...
+[16:59:42] [OUT] Inspecting URL 'http://lazy/register.php'...
+AutoAwesome is done.
+[17:59:43] testing webdav...
+********************************************************
+ Testing DAV connection
+[17:59:43] running nikto on lazy/80 in background...
+[17:59:43] running gobuster on lazy/80 in background...
+[17:59:43] checking for presence of wordpress...
+[17:59:43] running detailed nmap scan on udp ports  in background...
+[17:59:43] waiting for long scans to finish...
+[0;31m[18:07:14] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[18:07:14] found web server 10.10.10.18/80 info/issues...[0m
++ Start Time:         2018-02-24 17:59:43 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.7 (Ubuntu)
++ Retrieved x-powered-by header: PHP/5.5.9-1ubuntu4.21
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Apache/2.4.7 appears to be outdated (current is at least Apache/2.4.12). Apache 2.0.65 (final release) and 2.2.29 are also current.
++ Server leaks inodes via ETags, header found with file /favicon.ico, fields: 0x392a 0x54e8a80163e69 
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ OSVDB-3268: /images/: Directory indexing found.
++ OSVDB-3268: /images/?pattern=/etc/*&sort=name: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.
+[18:07:14] directories for http://lazy:80/...
+/classes (Status: 200)
+/css (Status: 200)
+/images (Status: 200)
+[0;32m[18:11:44] report for lazy...[0m
+[0;32m[18:11:44] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-24 17:59 CET
+Nmap scan report for lazy (10.10.10.18)
+Host is up (0.059s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   1024 e1:92:1b:48:f8:9b:63:96:d4:e5:7a:40:5f:a4:c8:33 (DSA)
+|   2048 af:a0:0f:26:cd:1a:b5:1f:a7:ec:40:94:ef:3c:81:5f (RSA)
+|   256 11:a3:2f:25:73:67:af:70:18:56:fe:a2:e3:54:81:e8 (ECDSA)
+|_  256 96:81:9c:f4:b7:bc:1a:73:05:ea:ba:41:35:a4:66:b7 (EdDSA)
+80/tcp open  http    Apache httpd 2.4.7 ((Ubuntu))
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+|_http-title: CompanyDev
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|specialized|WAP|phone
+Running (JUST GUESSING): Linux 3.X|4.X (94%), Crestron 2-Series (93%), Asus embedded (92%), Google Android 5.X|6.X|7.X (90%)
+OS CPE: cpe:/o:linux:linux_kernel:3.12 cpe:/o:linux:linux_kernel:4 cpe:/o:crestron:2_series cpe:/h:asus:rt-n56u cpe:/o:linux:linux_kernel:3.4 cpe:/o:linux:linux_kernel:4.1 cpe:/o:google:android:5 cpe:/o:google:android:6
+Aggressive OS guesses: Linux 3.12 (94%), Linux 3.13 (94%), Linux 3.16 (94%), Linux 3.2 - 4.8 (94%), Linux 3.8 - 3.11 (94%), Linux 3.18 (93%), Linux 4.2 (93%), Crestron XPanel control system (93%), ASUS RT-N56U WAP (Linux 3.4) (92%), Linux 3.10 - 4.8 (90%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 443/tcp)
+HOP RTT      ADDRESS
+1   50.69 ms 10.10.14.1
+2   50.82 ms lazy (10.10.10.18)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 36.18 seconds
+[0;32m[18:11:44] found open ports/services for udp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-24 17:59 CET
+Found no matches for the service mask 'lazy' and your specified protocols
+QUITTING!
+[0;32m[18:11:44] found ssh services, showing brute force attempt results...[0m
+Hydra v8.6 (c) 2017 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (http://www.thc.org/thc-hydra) starting at 2018-02-24 17:59:33
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 20 tasks per 1 server, overall 20 tasks, 1000 login tries (l:1/p:1000), ~50 tries per task
+[DATA] attacking ssh://lazy:22/
+[ERROR] target ssh://10.10.10.18:22/ does not support password authentication.
+[0;32m[18:11:44] found web server 10.10.10.18/80 info/issues...[0m
++ Start Time:         2018-02-24 17:59:43 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.7 (Ubuntu)
++ Retrieved x-powered-by header: PHP/5.5.9-1ubuntu4.21
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Apache/2.4.7 appears to be outdated (current is at least Apache/2.4.12). Apache 2.0.65 (final release) and 2.2.29 are also current.
++ Server leaks inodes via ETags, header found with file /favicon.ico, fields: 0x392a 0x54e8a80163e69 
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.
++ OSVDB-3268: /images/: Directory indexing found.
++ OSVDB-3268: /images/?pattern=/etc/*&sort=name: Directory indexing found.
++ OSVDB-3233: /icons/README: Apache default file found.
++ /login.php: Admin login page/section found.
++ 7373 requests: 0 error(s) and 11 item(s) reported on remote host
++ End Time:           2018-02-24 18:08:49 (GMT1) (546 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+[18:11:44] directories for http://lazy:80/...
+/classes (Status: 200)
+/css (Status: 200)
+/images (Status: 200)
+[18:11:44] waiting for long scans to finish...
+[18:11:44] udp deep scan still running... nmap
+[18:11:54] udp deep scan still running... nmap
+[18:12:04] udp deep scan still running... nmap
+[18:12:14] udp deep scan still running... nmap
+[18:12:24] udp deep scan still running... nmap
+[18:12:34] udp deep scan still running... nmap
+[18:12:44] udp deep scan still running... nmap
+[18:12:54] udp deep scan still running... nmap
+[18:13:04] udp deep scan still running... nmap
+[18:13:14] udp deep scan still running... nmap
+[18:13:24] udp deep scan still running... nmap
+[18:13:34] udp deep scan still running... nmap
+[18:13:44] udp deep scan still running... nmap
+[18:13:54] udp deep scan still running... nmap
+[18:14:04] udp deep scan still running... nmap
+[18:14:14] udp deep scan still running... nmap
+[18:14:24] udp deep scan still running... nmap
+[18:14:35] udp deep scan still running... nmap
+[18:14:45] udp deep scan still running... nmap
+[18:14:55] udp deep scan still running... nmap
+[18:15:05] udp deep scan still running... nmap
+[18:15:15] udp deep scan still running... nmap
+[18:15:25] udp deep scan still running... nmap
+[18:15:35] udp deep scan still running... nmap
+[18:15:45] udp deep scan still running... nmap
+[18:15:55] udp deep scan still running... nmap
+[18:16:05] udp deep scan still running... nmap
+[18:16:15] udp deep scan still running... nmap
+[18:16:25] udp deep scan still running... nmap
+[18:16:35] udp deep scan still running... nmap
+[18:16:45] udp deep scan still running... nmap
+[18:16:55] udp deep scan still running... nmap
+[18:17:05] udp deep scan still running... nmap
+[18:17:15] udp deep scan still running... nmap
+[18:17:25] udp deep scan still running... nmap
+[18:17:35] udp deep scan still running... nmap
+[18:17:45] udp deep scan still running... nmap
+[18:17:55] udp deep scan still running... nmap
+[18:18:05] udp deep scan still running... nmap
+[18:18:15] udp deep scan still running... nmap
+[18:18:25] udp deep scan still running... nmap
+[18:18:35] udp deep scan still running... nmap
+[18:18:45] udp deep scan still running... nmap
+[18:18:55] udp deep scan still running... nmap
+[18:19:05] udp deep scan still running... nmap
+[18:19:15] udp deep scan still running... nmap
+[18:19:25] udp deep scan still running... nmap
+[18:19:35] udp deep scan still running... nmap
+[18:19:45] udp deep scan still running... nmap
+[18:19:56] udp deep scan still running... nmap
+[18:20:06] udp deep scan still running... nmap
+[18:20:16] udp deep scan still running... nmap
+[18:20:26] udp deep scan still running... nmap
+[18:20:36] udp deep scan still running... nmap
+[18:20:46] udp deep scan still running... nmap
+[18:20:56] udp deep scan still running... nmap
+[18:21:06] udp deep scan still running... nmap
+[18:21:16] udp deep scan still running... nmap
+[18:21:26] udp deep scan still running... nmap

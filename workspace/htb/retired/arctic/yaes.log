@@ -1,0 +1,121 @@
+[0;32m[08:52:41] starting yaes...[0m
+[08:52:42] checking for required tools if they are present...
+[08:52:42] loading config file from /root/.yaes.conf...
+[08:52:42] using interface tun0
+[08:52:42] running quick tcp nmap scan for open ports...
+[08:52:45] nmap quick scan results for tcp...
+[32m[08:52:45] found open port 135/tcp for service msrpc[0m
+[32m[08:52:45] found open port 49154/tcp for service unknown[0m
+[08:52:45] running quick udp nmap scan for open ports...
+[08:52:54] nmap quick scan results for udp...
+[08:52:54] starting long scans in background...
+[08:52:54] starting long deep tcp scan in background...
+[08:52:54] starting long deep udp scan in background...
+[08:52:54] running detailed nmap scan on tcp ports 135,49154 in background...
+[08:52:54] checking application mapping...
+[0;32m[08:53:00] protocol on 10.10.10.11:135/tcp matches netbios-session[0m
+[08:53:00] port 135 seems like samba service, starting samba enumeration...
+[0;32m[08:53:00] found open samba port... enumerating...[0m
+[0;32m[08:53:00] trying to list files from shares without logging...[0m
+protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
+[08:53:00] checking application mapping...
+[0;32m[08:53:06] protocol on 10.10.10.11:49154/tcp matches netbios-session[0m
+[08:53:06] port 49154 seems like samba service, starting samba enumeration...
+[0;32m[08:53:06] found open samba port... enumerating...[0m
+[0;32m[08:53:06] trying to list files from shares without logging...[0m
+protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
+[08:53:06] running detailed nmap scan on udp ports  in background...
+[08:53:06] waiting for long scans to finish...
+[08:53:06] job 31294 still running... nmap
+[08:53:06] job 31568 still running... nmap
+[08:53:26] job 31294 still running... nmap
+[08:53:46] job 31294 still running... nmap
+[08:54:06] job 31294 still running... nmap
+[0;31m[08:54:06] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[08:54:46] report for arctic...[0m
+[0;32m[08:54:46] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-19 08:52 CET
+Nmap scan report for arctic (10.10.10.11)
+Host is up (0.068s latency).
+
+PORT      STATE SERVICE VERSION
+135/tcp   open  msrpc   Microsoft Windows RPC
+49154/tcp open  msrpc   Microsoft Windows RPC
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Microsoft Windows Server 2008 R2 (91%), Microsoft Windows Server 2008 R2 SP1 or Windows 8 (91%), Microsoft Windows 7 Professional or Windows 8 (91%), Microsoft Windows 7 SP1 or Windows Server 2008 SP2 or 2008 R2 SP1 (91%), Microsoft Windows Vista SP0 or SP1, Windows Server 2008 SP1, or Windows 7 (91%), Microsoft Windows Vista SP2 (91%), Microsoft Windows Vista SP2, Windows 7 SP1, or Windows Server 2008 (90%), Microsoft Windows 8.1 Update 1 (90%), Microsoft Windows Phone 7.5 or 8.0 (90%), Microsoft Windows Server 2008 R2 or Windows 8.1 (90%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+TRACEROUTE (using port 135/tcp)
+HOP RTT      ADDRESS
+1   74.42 ms 10.10.14.1
+2   74.60 ms arctic (10.10.10.11)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 76.94 seconds
+[0;32m[08:54:46] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-19 08:53 CET
+Found no matches for the service mask 'arctic' and your specified protocols
+QUITTING!
+[0;32m[08:54:46] samba enumeration...[0m
+protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
+protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
+[08:54:46] waiting for long scans to finish...
+[08:54:46] tcp deep scan still running... nmap
+[08:54:56] tcp deep scan still running... nmap
+[08:55:06] tcp deep scan still running... nmap
+[08:55:16] tcp deep scan still running... nmap
+[08:55:26] tcp deep scan still running... nmap
+[08:55:36] tcp deep scan still running... nmap
+[08:55:46] tcp deep scan still running... nmap
+[08:55:56] tcp deep scan still running... nmap
+[08:56:06] tcp deep scan still running... nmap
+[08:56:16] tcp deep scan still running... nmap
+[08:56:26] tcp deep scan still running... nmap
+[08:56:36] tcp deep scan still running... nmap
+[0;32m[08:56:56] displaying tcp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-19 08:52 CET
+Nmap scan report for arctic (10.10.10.11)
+Host is up (0.052s latency).
+Not shown: 65532 filtered ports
+PORT      STATE SERVICE VERSION
+135/tcp   open  msrpc   Microsoft Windows RPC
+8500/tcp  open  fmtp?
+49154/tcp open  msrpc   Microsoft Windows RPC
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 226.77 seconds
+[0;32m[08:56:56] displaying udp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-19 08:52 CET
+Nmap scan report for arctic (10.10.10.11)
+Host is up (0.047s latency).
+
+PORT   STATE         SERVICE
+0/udp  open|filtered unknown
+1/udp  open|filtered tcpmux
+2/udp  open|filtered compressnet
+3/udp  open|filtered compressnet
+4/udp  open|filtered unknown
+5/udp  open|filtered rje
+6/udp  open|filtered unknown
+7/udp  open|filtered echo
+8/udp  open|filtered unknown
+9/udp  open|filtered discard
+10/udp open|filtered unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 2.53 seconds
+[08:56:56] matching nmap xml output with searchsploit (tcp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//arctic/nmap/arctic.tcp.detailed.xml'
+
+[08:56:57] matching nmap udp output with searchsploit (udp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//arctic/nmap/arctic.udp.detailed.xml'
+
+[0;32m[08:56:57] yaes has finished![0m

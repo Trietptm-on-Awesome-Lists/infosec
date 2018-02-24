@@ -1,0 +1,107 @@
+[0;32m[11:58:50] starting yaes...[0m
+[11:58:50] checking for required tools if they are present...
+[11:58:50] loading config file from /root/.yaes.conf...
+[11:58:50] using interface tun0
+[11:58:50] running quick tcp nmap scan for open ports...
+[11:58:54] nmap quick scan results for tcp...
+[32m[11:58:54] found open port 80/tcp for service http[0m
+[11:58:54] running quick udp nmap scan for open ports...
+[11:59:07] nmap quick scan results for udp...
+[11:59:07] starting long scans in background...
+[11:59:07] starting long deep tcp scan in background...
+[11:59:07] starting long deep udp scan in background...
+[11:59:07] running detailed nmap scan on tcp ports 80 in background...
+[11:59:07] checking application mapping...
+[0;32m[11:59:07] protocol on 10.10.10.15:80/tcp matches http[0m
+[0;32m[11:59:07] protocol on 10.10.10.15:80/tcp matches http-iis[0m
+[11:59:07] port 80 seems like web service, starting web scanners...
+[11:59:07] running whatweb on granny/80...
+[1m[34mhttp://granny:80/[0m [200 OK] [1m[37mCountry[0m[[37mRESERVED[0m][[1m[31mZZ[0m], [1m[37mHTTPServer[0m[[1m[36mMicrosoft-IIS/6.0[0m], [1m[37mIP[0m[[37m10.10.10.15[0m], [1m[37mMicrosoft-IIS[0m[[1m[32m6.0[0m][[1m[31mUnder Construction[0m], [1m[37mMicrosoftOfficeWebServer[0m[[1m[32m5.0_Pub[0m], [1m[37mUncommonHeaders[0m[[37mmicrosoftofficewebserver[0m], [1m[37mX-Powered-By[0m[[37mASP.NET[0m]
+[11:59:09] running fimap on granny/80...
+fimap v.1.00_svn (My life for Aiur)
+:: Automatic LFI/RFI scanner and exploiter
+:: by Iman Karim (fimap.dev@gmail.com)
+
+AutoAwesome mode engaging URL 'http://granny:80/'...
+Requesting 'http://granny:80/'...
+Starting harvester engine to get links (Depth: 0)...
+No links found.
+AutoAwesome is done.
+[11:59:10] running nikto on granny/80 in background...
+[11:59:10] running gobuster on granny/80 in background...
+[11:59:10] checking for presence of wordpress...
+[11:59:11] running detailed nmap scan on udp ports  in background...
+[11:59:11] waiting for long scans to finish...
+[11:59:11] current progres outside... 1
+[11:59:31] current progres outside... 2
+[0;31m[11:59:31] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:59:31] found web server 10.10.10.15/80 info/issues...[0m
++ Start Time:         2018-02-22 11:59:10 (GMT1)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/6.0
++ Retrieved microsoftofficewebserver header: 5.0_Pub
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ Uncommon header 'microsoftofficewebserver' found, with contents: 5.0_Pub
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
+[11:59:31] directories for http://granny:80/...
+/images (Status: 200)
+/Images (Status: 200)
+/IMAGES (Status: 200)
+[11:59:51] current progres outside... 1
+[12:00:11] current progres outside... 2
+[0;31m[12:00:11] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[12:00:11] found web server 10.10.10.15/80 info/issues...[0m
++ Start Time:         2018-02-22 11:59:10 (GMT1)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/6.0
++ Retrieved microsoftofficewebserver header: 5.0_Pub
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ Uncommon header 'microsoftofficewebserver' found, with contents: 5.0_Pub
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Retrieved x-aspnet-version header: 1.1.4322
+[12:00:11] directories for http://granny:80/...
+/images (Status: 200)
+/Images (Status: 200)
+/IMAGES (Status: 200)
+[12:00:31] current progres outside... 1
+[12:00:51] current progres outside... 2
+[0;31m[12:00:51] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[12:00:51] found web server 10.10.10.15/80 info/issues...[0m
++ Start Time:         2018-02-22 11:59:10 (GMT1)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/6.0
++ Retrieved microsoftofficewebserver header: 5.0_Pub
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ Uncommon header 'microsoftofficewebserver' found, with contents: 5.0_Pub
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Retrieved x-aspnet-version header: 1.1.4322
+[12:00:51] directories for http://granny:80/...
+/images (Status: 200)
+/Images (Status: 200)
+/IMAGES (Status: 200)
+[12:01:11] current progres outside... 1
+[12:01:31] current progres outside... 2
+[0;31m[12:01:31] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[12:01:31] found web server 10.10.10.15/80 info/issues...[0m
++ Start Time:         2018-02-22 11:59:10 (GMT1)
+---------------------------------------------------------------------------
++ Server: Microsoft-IIS/6.0
++ Retrieved microsoftofficewebserver header: 5.0_Pub
++ Retrieved x-powered-by header: ASP.NET
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ Uncommon header 'microsoftofficewebserver' found, with contents: 5.0_Pub
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Retrieved x-aspnet-version header: 1.1.4322
++ No CGI Directories found (use '-C all' to force check all possible dirs)
+[12:01:31] directories for http://granny:80/...
+/images (Status: 200)
+/Images (Status: 200)
+/IMAGES (Status: 200)
+[12:01:51] current progres outside... 1

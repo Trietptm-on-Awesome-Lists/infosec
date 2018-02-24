@@ -1,0 +1,322 @@
+[0;32m[13:57:10] starting yaes...[0m
+[13:57:10] checking for required tools if they are present...
+[13:57:10] loading config file from /root/.yaes.conf...
+[13:57:10] using interface tun0
+[13:57:10] running quick tcp nmap scan for open ports...
+[13:57:13] nmap quick scan results for tcp...
+[32m[13:57:13] found open port 22/tcp for service ssh[0m
+[32m[13:57:13] found open port 53/tcp for service domain[0m
+[32m[13:57:13] found open port 80/tcp for service http[0m
+[13:57:13] running quick udp nmap scan for open ports...
+[13:57:23] nmap quick scan results for udp...
+[13:57:23] starting long scans in background...
+[13:57:23] starting long deep tcp scan in background...
+[13:57:23] starting long deep udp scan in background...
+[13:57:23] running detailed nmap scan on tcp ports 22,53,80 in background...
+[13:57:23] checking application mapping...
+[0;32m[13:57:29] protocol on 10.10.10.13:22/tcp matches ssh[0m
+[0;32m[13:57:29] protocol on 10.10.10.13:22/tcp matches ssh-openssh[0m
+[13:57:29] port 22 seems like ssh service, starting ssh enumeration/bruteforce...
+[0;32m[13:57:29] ssh banner grabbing for 22/ssh...[0m
+|_banner: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.1
+[0;32m[13:57:30] quick brute force on ssh using root as login...[0m
+[13:57:30] running quick hydra on cronos/22 (ssh) in background...
+[13:57:30] checking application mapping...
+[0;32m[13:57:39] protocol on 10.10.10.13:53/tcp matches dns[0m
+[13:57:39] checking application mapping...
+[0;32m[13:57:45] protocol on 10.10.10.13:80/tcp matches http[0m
+[0;32m[13:57:45] protocol on 10.10.10.13:80/tcp matches http-apache-2[0m
+[13:57:45] port 80 seems like web service, starting web scanners...
+[13:57:45] checking available methods on cronos/80...
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-22 13:57 CET
+Nmap scan report for cronos (10.10.10.13)
+Host is up (0.098s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+
+Nmap done: 1 IP address (1 host up) scanned in 1.18 seconds
+[13:57:46] running whatweb on cronos/80...
+[1m[34mhttp://cronos:80/[0m [200 OK] [1m[37mApache[0m[[1m[32m2.4.18[0m], [1m[37mCountry[0m[[37mRESERVED[0m][[1m[31mZZ[0m], [1m[37mHTTPServer[0m[[1m[31mUbuntu Linux[0m][[1m[36mApache/2.4.18 (Ubuntu)[0m], [1m[37mIP[0m[[37m10.10.10.13[0m], [1m[37mPoweredBy[0m[[37m{[0m], [1m[37mScript[0m[[37mtext/javascript[0m], [1m[37mTitle[0m[[1m[33mApache2 Ubuntu Default Page: It works[0m]
+[13:57:47] running fimap on cronos/80...
+fimap v.1.00_svn (My life for Aiur)
+:: Automatic LFI/RFI scanner and exploiter
+:: by Iman Karim (fimap.dev@gmail.com)
+
+AutoAwesome mode engaging URL 'http://cronos:80/'...
+Requesting 'http://cronos:80/'...
+Starting harvester engine to get links (Depth: 0)...
+No links found.
+AutoAwesome is done.
+[13:57:48] testing webdav...
+********************************************************
+ Testing DAV connection
+[13:57:48] running nikto on cronos/80 in background...
+[13:57:48] running gobuster on cronos/80 in background...
+[13:57:48] checking for presence of wordpress...
+[13:57:51] running detailed nmap scan on udp ports 53 in background...
+[13:57:51] checking application mapping...
+[0;32m[13:58:00] Protocol on 10.10.10.13:53/tcp matches dns[0m
+[13:58:00] waiting for long scans to finish...
+[0;31m[13:59:41] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[13:59:41] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
+[13:59:41] directories for http://cronos:80/...
+[0;31m[14:01:42] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[14:01:42] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
+[14:01:42] directories for http://cronos:80/...
+[0;31m[14:03:42] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[14:03:42] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
+[14:03:42] directories for http://cronos:80/...
+[0;31m[14:05:42] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[14:05:42] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
+[14:05:42] directories for http://cronos:80/...
+[0;31m[14:07:42] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[14:07:42] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
+[14:07:42] directories for http://cronos:80/...
+[0;31m[10:59:51] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[10:59:51] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ OSVDB-3233: /icons/README: Apache default file found.
+[10:59:51] directories for http://cronos:80/...
+[0;31m[11:01:51] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:01:51] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ OSVDB-3233: /icons/README: Apache default file found.
+[11:01:51] directories for http://cronos:80/...
+[0;31m[11:03:52] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:03:52] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ OSVDB-3233: /icons/README: Apache default file found.
+[11:03:52] directories for http://cronos:80/...
+[0;31m[11:05:52] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:05:52] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ OSVDB-3233: /icons/README: Apache default file found.
+[11:05:52] directories for http://cronos:80/...
+[0;31m[11:07:53] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:07:53] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ OSVDB-3233: /icons/README: Apache default file found.
+[11:07:53] directories for http://cronos:80/...
+[0;32m[11:09:33] report for cronos...[0m
+[0;32m[11:09:33] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-22 13:57 CET
+Nmap scan report for cronos (10.10.10.13)
+Host is up (0.13s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 18:b9:73:82:6f:26:c7:78:8f:1b:39:88:d8:02:ce:e8 (RSA)
+|   256 1a:e6:06:a6:05:0b:bb:41:92:b0:28:bf:7f:e5:96:3b (ECDSA)
+|_  256 1a:0e:e7:ba:00:cc:02:01:04:cd:a3:a9:3f:5e:22:20 (EdDSA)
+53/tcp open  domain  ISC BIND 9.10.3-P4-Ubuntu
+| dns-nsid: 
+|_  bind.version: 9.10.3-P4-Ubuntu
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Linux 3.10 - 4.8 (92%), Linux 3.12 (92%), Linux 3.13 (92%), Linux 3.13 or 4.2 (92%), Linux 3.16 - 4.6 (92%), Linux 3.2 - 4.8 (92%), Linux 3.8 - 3.11 (92%), Linux 4.4 (92%), Linux 3.16 (90%), Linux 3.18 (90%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 80/tcp)
+HOP RTT       ADDRESS
+1   122.50 ms 10.10.14.1
+2   122.40 ms cronos (10.10.10.13)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 39.15 seconds
+[0;32m[11:09:33] found open ports/services for tcp...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-22 13:57 CET
+Nmap scan report for cronos (10.10.10.13)
+Host is up (0.12s latency).
+
+PORT   STATE SERVICE VERSION
+53/udp open  domain  ISC BIND 9.10.3-P4-Ubuntu
+| dns-nsid: 
+|_  bind.version: 9.10.3-P4-Ubuntu
+Too many fingerprints match this host to give specific OS details
+Network Distance: 2 hops
+
+TRACEROUTE (using port 53/udp)
+HOP RTT       ADDRESS
+1   129.65 ms 10.10.14.1
+2   129.84 ms cronos (10.10.10.13)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 28.67 seconds
+[0;32m[11:09:33] found ssh services, showing brute force attempt results...[0m
+Hydra v8.6 (c) 2017 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (http://www.thc.org/thc-hydra) starting at 2018-02-22 13:57:30
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[WARNING] Restorefile (you have 10 seconds to abort... (use option -I to skip waiting)) from a previous session found, to prevent overwriting, ./hydra.restore
+[DATA] max 20 tasks per 1 server, overall 20 tasks, 1000 login tries (l:1/p:1000), ~50 tries per task
+[DATA] attacking ssh://cronos:22/
+[STATUS] 322.00 tries/min, 322 tries in 00:01h, 680 to do in 00:03h, 20 active
+[STATUS] 287.50 tries/min, 575 tries in 00:02h, 427 to do in 00:02h, 20 active
+[STATUS] 274.33 tries/min, 823 tries in 00:03h, 179 to do in 00:01h, 20 active
+1 of 1 target completed, 0 valid passwords found
+Hydra (http://www.thc.org/thc-hydra) finished at 2018-02-22 14:01:27
+[0;32m[11:09:33] found web server 10.10.10.13/80 info/issues...[0m
++ Start Time:         2018-02-22 13:57:49 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.18 (Ubuntu)
++ Server leaks inodes via ETags, header found with file /, fields: 0x30a6 0x555402443a52b 
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ OSVDB-3233: /icons/README: Apache default file found.
++ ERROR: Error limit (20) reached for host, giving up. Last error: opening stream: can't connect (timeout): Operation now in progress
++ Scan terminated:  20 error(s) and 6 item(s) reported on remote host
++ End Time:           2018-02-23 11:09:13 (GMT1) (76284 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+[11:09:33] directories for http://cronos:80/...
+[11:09:33] waiting for long scans to finish...
+[0;32m[11:09:43] displaying tcp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-22 13:57 CET
+Nmap scan report for cronos (10.10.10.13)
+Host is up (0.12s latency).
+Not shown: 65532 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 18:b9:73:82:6f:26:c7:78:8f:1b:39:88:d8:02:ce:e8 (RSA)
+|   256 1a:e6:06:a6:05:0b:bb:41:92:b0:28:bf:7f:e5:96:3b (ECDSA)
+|_  256 1a:0e:e7:ba:00:cc:02:01:04:cd:a3:a9:3f:5e:22:20 (EdDSA)
+53/tcp open  domain  ISC BIND 9.10.3-P4-Ubuntu
+| dns-nsid: 
+|_  bind.version: 9.10.3-P4-Ubuntu
+80/tcp open  http    Apache/2.4.18 (Ubuntu)
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 300.56 seconds
+[0;32m[11:09:43] displaying udp deep scan results...[0m
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-22 13:57 CET
+Nmap scan report for cronos (10.10.10.13)
+Host is up (0.32s latency).
+
+PORT   STATE         SERVICE
+0/udp  open|filtered unknown
+1/udp  open|filtered tcpmux
+2/udp  open|filtered compressnet
+3/udp  open|filtered compressnet
+4/udp  open|filtered unknown
+5/udp  open|filtered rje
+6/udp  open|filtered unknown
+7/udp  open|filtered echo
+8/udp  open|filtered unknown
+9/udp  open|filtered discard
+10/udp open|filtered unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 3.10 seconds
+[11:09:43] matching nmap xml output with searchsploit (tcp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//cronos/nmap/cronos.tcp.detailed.xml'
+
+[11:09:43] matching nmap udp output with searchsploit (udp)...
+[i] SearchSploit's XML mode (without verbose enabled).   To enable: searchsploit -v --xml...
+[i] Reading: '/root/.yaes/logs//cronos/nmap/cronos.udp.detailed.xml'
+
+[0;32m[11:09:43] yaes has finished![0m

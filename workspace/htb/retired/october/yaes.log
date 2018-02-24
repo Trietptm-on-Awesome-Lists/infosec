@@ -1,0 +1,130 @@
+[0;32m[11:48:19] starting yaes...[0m
+[11:48:19] checking for required tools if they are present...
+[11:48:19] loading config file from /root/.yaes.conf...
+[11:48:19] using interface tun0
+[11:48:19] running quick tcp nmap scan for open ports...
+[11:48:22] nmap quick scan results for tcp...
+[32m[11:48:22] found open port 22/tcp for service ssh[0m
+[32m[11:48:22] found open port 80/tcp for service http[0m
+[11:48:22] running quick udp nmap scan for open ports...
+[11:48:25] nmap quick scan results for udp...
+[0;31m[11:48:25] no open udp ports found![0m
+[11:48:25] starting long scans in background...
+[11:48:25] starting long deep tcp scan in background...
+[11:48:25] starting long deep udp scan in background...
+[11:48:25] running detailed nmap scan on tcp ports 22,80 in background...
+[11:48:25] checking application mapping...
+[0;32m[11:48:31] protocol on 10.10.10.16:22/tcp matches ssh[0m
+[0;32m[11:48:31] protocol on 10.10.10.16:22/tcp matches ssh-openssh[0m
+[11:48:31] port 22 seems like ssh service, starting ssh enumeration/bruteforce...
+[0;32m[11:48:31] ssh banner grabbing for 22/ssh...[0m
+|_banner: SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8
+[0;32m[11:48:31] quick brute force on ssh using root as login...[0m
+[11:48:31] running quick hydra on october/22 (ssh) in background...
+[11:48:31] checking application mapping...
+[0;32m[11:48:38] protocol on 10.10.10.16:80/tcp matches http[0m
+[0;32m[11:48:38] protocol on 10.10.10.16:80/tcp matches http-apache-2[0m
+[11:48:38] port 80 seems like web service, starting web scanners...
+[11:48:38] checking available methods on october/80...
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-02-24 11:48 CET
+Nmap scan report for october (10.10.10.16)
+Host is up (0.053s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+| http-methods: 
+|   Supported Methods: GET HEAD POST PUT PATCH DELETE OPTIONS
+|_  Potentially risky methods: PUT PATCH DELETE
+
+Nmap done: 1 IP address (1 host up) scanned in 1.12 seconds
+[11:48:39] running whatweb on october/80...
+[1m[34mhttp://october:80/[0m [200 OK] [1m[37mApache[0m[[1m[32m2.4.7[0m], [1m[37mCookies[0m[[37moctober_session[0m], [1m[37mCountry[0m[[37mRESERVED[0m][[1m[31mZZ[0m], [1m[37mHTML5[0m, [1m[37mHTTPServer[0m[[1m[31mUbuntu Linux[0m][[1m[36mApache/2.4.7 (Ubuntu)[0m], [1m[37mHttpOnly[0m[[37moctober_session[0m], [1m[37mIP[0m[[37m10.10.10.16[0m], [1m[37mMeta-Author[0m[[37mOctober CMS[0m], [1m[37mPHP[0m[[1m[32m5.5.9-1ubuntu4.21[0m], [1m[37mScript[0m, [1m[37mTitle[0m[[1m[33mOctober CMS - Vanilla[0m], [1m[37mX-Powered-By[0m[[37mPHP/5.5.9-1ubuntu4.21[0m]
+[11:48:40] running fimap on october/80...
+fimap v.1.00_svn (My life for Aiur)
+:: Automatic LFI/RFI scanner and exploiter
+:: by Iman Karim (fimap.dev@gmail.com)
+
+AutoAwesome mode engaging URL 'http://october:80/'...
+Requesting 'http://october:80/'...
+Cookies retrieved. Using them for further requests.
+Testing file inclusion against given cookies...
+[10:48:40] [OUT] Inspecting URL 'http://october:80/'...
+[10:48:40] [INFO] Fiddling around with URL...
+Starting harvester engine to get links (Depth: 0)...
+No links found.
+AutoAwesome is done.
+[11:48:41] testing webdav...
+********************************************************
+ Testing DAV connection
+[11:48:41] running nikto on october/80 in background...
+[11:48:41] running gobuster on october/80 in background...
+[11:48:41] checking for presence of wordpress...
+[11:50:14] waiting for long scans to finish...
+[0;31m[11:51:55] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:51:55] found web server 10.10.10.16/80 info/issues...[0m
++ Start Time:         2018-02-24 11:48:42 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.7 (Ubuntu)
++ Retrieved x-powered-by header: PHP/5.5.9-1ubuntu4.21
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
+[11:51:55] directories for http://october:80/...
+/account (Status: 200)
+/blog (Status: 200)
+/forum (Status: 200)
+[0;31m[11:53:56] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:53:56] found web server 10.10.10.16/80 info/issues...[0m
++ Start Time:         2018-02-24 11:48:42 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.7 (Ubuntu)
++ Retrieved x-powered-by header: PHP/5.5.9-1ubuntu4.21
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
+[11:53:56] directories for http://october:80/...
+/account (Status: 200)
+/backend (Status: 200)
+/blog (Status: 200)
+/forum (Status: 200)
+[0;31m[11:55:56] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:55:56] found web server 10.10.10.16/80 info/issues...[0m
++ Start Time:         2018-02-24 11:48:42 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.7 (Ubuntu)
++ Retrieved x-powered-by header: PHP/5.5.9-1ubuntu4.21
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ ERROR: Error limit (20) reached for host, giving up. Last error: error reading HTTP response
++ Scan terminated:  20 error(s) and 4 item(s) reported on remote host
++ End Time:           2018-02-24 11:55:45 (GMT1) (423 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+[11:55:56] directories for http://october:80/...
+/account (Status: 200)
+/backend (Status: 200)
+/blog (Status: 200)
+/Blog (Status: 200)
+/forum (Status: 200)
+[0;31m[11:57:56] scan still not finished, partial results, so you can start looking...[0m
+[0;32m[11:57:56] found web server 10.10.10.16/80 info/issues...[0m
++ Start Time:         2018-02-24 11:48:42 (GMT1)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.7 (Ubuntu)
++ Retrieved x-powered-by header: PHP/5.5.9-1ubuntu4.21
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ ERROR: Error limit (20) reached for host, giving up. Last error: error reading HTTP response
++ Scan terminated:  20 error(s) and 4 item(s) reported on remote host
++ End Time:           2018-02-24 11:55:45 (GMT1) (423 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+[11:57:56] directories for http://october:80/...
+/account (Status: 200)
+/backend (Status: 200)
+/blog (Status: 200)
+/Blog (Status: 200)
+/forum (Status: 200)

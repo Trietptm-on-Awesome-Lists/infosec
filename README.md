@@ -1,7 +1,10 @@
 # infosec - ultimate personal collection
 
+## cheatsheetz
+cheatsheetz are [here](cheatsheetz/cheatsheetz.md)
+
 ## yaes
-my personal project for most-possibly automated way for initial recon, this is work in progress
+my personal project for most-possibly automated way for initial recon and post-exploitation and whatever I can fit in, this is work in progress
 ## buffer-overflow
 mostly exploits for different techniques when dealing with buffer overflows
 ## cracking
